@@ -14,6 +14,8 @@ class CollectionViewController: UIViewController {
     @IBOutlet weak var camera: UIButton!
     @IBOutlet weak var album: UIButton!
     
+    @IBOutlet weak var memeCollectionView: UICollectionView!
+    
     let imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
@@ -87,5 +89,24 @@ extension CollectionViewController: UIImagePickerControllerDelegate, UINavigatio
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
+    
+}
+
+extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return savedMemes.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath)
+        cell.backgroundColor = .red
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+    }
+    
+    
     
 }

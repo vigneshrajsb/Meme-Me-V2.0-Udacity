@@ -138,6 +138,7 @@
                         <outlet property="memeList" destination="stG-kG-gMA" id="06B-oQ-NSJ"/>
                         <outlet property="topView" destination="aAI-iK-z97" id="NeV-HP-LJW"/>
                         <segue destination="PRy-ga-o11" kind="show" identifier="tableToEditor" id="sOf-SA-tBr"/>
+                        <segue destination="R3v-hh-3IQ" kind="show" identifier="listToDetail" id="5eR-ao-ab6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H1L-2d-2RF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -215,7 +216,7 @@
                                 <rect key="frame" x="37.5" y="151.5" width="300" height="300"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nlZ-Tf-fPd">
-                                        <rect key="frame" x="44" y="8" width="212.5" height="80"/>
+                                        <rect key="frame" x="69.5" y="8" width="161.5" height="80"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="80" id="9zL-ob-f6a"/>
                                         </constraints>
@@ -314,6 +315,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="0pu-5b-ESL"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                         <state key="normal" title="Done">
                                             <color key="titleColor" red="1" green="0.95686274510000002" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -383,7 +385,38 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mlj-18-2xV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2941.5999999999999" y="-34.632683658170919"/>
+            <point key="canvasLocation" x="2543" y="-17"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="Tio-zO-eRU">
+            <objects>
+                <viewController id="R3v-hh-3IQ" customClass="DetailViewController" customModule="Meme_Me_V2_0" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="X4L-by-AlM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="t3A-Dk-Nsc">
+                                <rect key="frame" x="0.0" y="114" width="375" height="375"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="375" id="E90-rx-nq9"/>
+                                    <constraint firstAttribute="height" constant="375" id="WdC-1E-M8c"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="t3A-Dk-Nsc" firstAttribute="centerY" secondItem="X4L-by-AlM" secondAttribute="centerY" id="4zp-9r-K5j"/>
+                            <constraint firstItem="t3A-Dk-Nsc" firstAttribute="centerX" secondItem="X4L-by-AlM" secondAttribute="centerX" id="BGq-MJ-zWh"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="DmT-wm-sVv"/>
+                    </view>
+                    <connections>
+                        <segue destination="PRy-ga-o11" kind="show" identifier="detailToEditor" id="Qx7-gq-06i"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pcd-pg-S89" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3287" y="-434"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hHI-0O-kTD">
@@ -473,6 +506,10 @@
                                         <color key="backgroundColor" red="0.67404216610000001" green="0.26274509800000001" blue="0.48627450979999998" alpha="1" colorSpace="calibratedRGB"/>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="cZG-SQ-K2P" id="jIc-md-NVU"/>
+                                    <outlet property="delegate" destination="cZG-SQ-K2P" id="wY2-NV-9yl"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -489,6 +526,7 @@
                     <connections>
                         <outlet property="album" destination="HDe-Kz-6do" id="jHX-ud-ogt"/>
                         <outlet property="camera" destination="qwJ-MB-J9z" id="wQ4-Yf-UCV"/>
+                        <outlet property="memeCollectionView" destination="U6E-fo-3nY" id="EkV-jA-D1O"/>
                         <outlet property="topView" destination="2X8-LL-4xV" id="dv5-9M-QMT"/>
                         <segue destination="PRy-ga-o11" kind="show" identifier="collectionToEditor" id="ixM-GM-SKL"/>
                     </connections>
@@ -505,6 +543,6 @@
         <image name="table" width="22.5" height="22.5"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="sOf-SA-tBr"/>
+        <segue reference="Qx7-gq-06i"/>
     </inferredMetricsTieBreakers>
 </document>

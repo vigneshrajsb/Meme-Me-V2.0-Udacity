@@ -28,15 +28,15 @@ class ListViewController: UIViewController {
     }
     
     func createTestDate() {
-        let addIMage = UIImage(named: "add")
-        let collectionImage = UIImage(named: "collection")
-        let cameraImage = UIImage(named: "camera")
-        let albumImage = UIImage(named: "album")
+        let meme1 = UIImage(named: "meme1")
+        let meme2 = UIImage(named: "meme2")
+        let meme3 = UIImage(named: "meme3")
+        let meme4 = UIImage(named: "meme4")
         
-        savedMemes.append(Meme(image: addIMage!, topText: "Add Image", bottomText: "Add bottom Text", dateSaved: Date(), memedImage: addIMage!))
-        savedMemes.append(Meme(image: collectionImage!, topText: "collection Image", bottomText: "collection bottom Text", dateSaved: Date(), memedImage: collectionImage!))
-        savedMemes.append(Meme(image: cameraImage!, topText: "camera Image", bottomText: "camera bottom Text", dateSaved: Date(), memedImage: cameraImage!))
-        savedMemes.append(Meme(image: albumImage!, topText: "album Image", bottomText: "album bottom Text", dateSaved: Date(), memedImage: albumImage!))
+        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!))
+        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image", bottomText: "Meme 2 bottom Text", dateSaved: Date(), memedImage: meme2!))
+        savedMemes.append(Meme(image: meme3!, topText: "Meme 3 Image", bottomText: "camera bottom Text", dateSaved: Date(), memedImage: meme3!))
+        savedMemes.append(Meme(image: meme4!, topText: "album Image", bottomText: "album bottom Text", dateSaved: Date(), memedImage: meme4!))
         
     }
     
@@ -124,7 +124,14 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
         return UITableViewCell()
     }
     
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: segueToDetailFromTable, sender: self)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
     
     
 }

@@ -16,6 +16,8 @@ let maxCharactersAllowedForMemeText = 50
 
 let segueFromTableView = "tableToEditor"
 let segueFromCollectionView = "collectionToEditor"
+let segueToDetailFromTable = "listToDetail"
+let segueDetailToEditor = "detailToEditor"
 
 
 func removeNavBarBorder(for navigationController: UINavigationController) {
@@ -78,7 +80,7 @@ func getFontFromString(string: String) -> UIFont {
     case "AVENIRNEXT":
         fontName = "AvenirNext-Medium"
     default:
-        "Impact"
+        fontName = "Impact"
     }
     guard let font = UIFont(name: fontName, size: 30.0) else { return UIFont() }
     return font

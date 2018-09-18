@@ -18,6 +18,7 @@
 		5084E96B214EE4B100B66824 /* Impact.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5084E96A214EE4B100B66824 /* Impact.ttf */; };
 		50A21005214F011500732A44 /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A21004214F011500732A44 /* Meme.swift */; };
 		50ADE0DE214D81DC00FEA7C1 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50ADE0DD214D81DC00FEA7C1 /* CustomTabBarController.swift */; };
+		50B59FC32150D8F800DED84C /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B59FC22150D8F800DED84C /* DetailViewController.swift */; };
 		50D373C9214CB0B10084FA9E /* MemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D373C8214CB0B10084FA9E /* MemeViewController.swift */; };
 		50E278BC21504F4F00FB0EE0 /* MemeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E278BB21504F4F00FB0EE0 /* MemeListCell.swift */; };
 /* End PBXBuildFile section */
@@ -36,6 +37,7 @@
 		5084E96A214EE4B100B66824 /* Impact.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Impact.ttf; sourceTree = "<group>"; };
 		50A21004214F011500732A44 /* Meme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
 		50ADE0DD214D81DC00FEA7C1 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
+		50B59FC22150D8F800DED84C /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		50D373C8214CB0B10084FA9E /* MemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeViewController.swift; sourceTree = "<group>"; };
 		50E278BB21504F4F00FB0EE0 /* MemeListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeListCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -124,6 +126,7 @@
 				50D373C8214CB0B10084FA9E /* MemeViewController.swift */,
 				50759BBD214A3C7C00FCCBC8 /* ListViewController.swift */,
 				50759BBF214A3C8900FCCBC8 /* CollectionViewController.swift */,
+				50B59FC22150D8F800DED84C /* DetailViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -202,6 +205,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50B59FC32150D8F800DED84C /* DetailViewController.swift in Sources */,
 				50759BC0214A3C8900FCCBC8 /* CollectionViewController.swift in Sources */,
 				50D373C9214CB0B10084FA9E /* MemeViewController.swift in Sources */,
 				50A21005214F011500732A44 /* Meme.swift in Sources */,

@@ -57,7 +57,6 @@ class MemeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initUI()
-        print(view.frame.origin.y)
         
     }
     
@@ -84,6 +83,14 @@ class MemeViewController: UIViewController {
         setupObserversForKeyboard()
         
 
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+          self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+          self.tabBarController?.tabBar.isHidden = false
     }
     
     func setupObserversForKeyboard() {
@@ -126,10 +133,10 @@ class MemeViewController: UIViewController {
         print("set layout")
         if UIDevice.current.orientation.isPortrait {
             sizeForMemeView = view.safeAreaLayoutGuide.layoutFrame.width
-             sizeForPopUp = sizeForMemeView - 40
+             sizeForPopUp = sizeForMemeView - sizeForMemeView/9
         } else if UIDevice.current.orientation.isLandscape {
             sizeForMemeView = view.safeAreaLayoutGuide.layoutFrame.height
-             sizeForPopUp = sizeForMemeView - 20
+             sizeForPopUp = sizeForMemeView - sizeForMemeView/16
         }
         constraintMemeWidth.constant = sizeForMemeView
         constraintMemeHeight.constant = sizeForMemeView
@@ -141,15 +148,9 @@ class MemeViewController: UIViewController {
         setLayout()
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        print("viewWillTransition")
-          viewFrameOriginY = view.frame.origin.y
-    }
-    
 
     
     func setTextViewAttributes() {
-        
     let topAttributed =  NSMutableAttributedString(string: topTextView.text, attributes: attributes)
         topAttributed.addAttribute(NSAttributedString.Key.font, value: getFontFromString(string: selectedFont).withSize(sizeForTopTextView), range: NSRange(location: 0, length: topAttributed.length))
     topTextView.attributedText = topAttributed
@@ -161,8 +162,6 @@ class MemeViewController: UIViewController {
             , value: getFontFromString(string: selectedFont).withSize(sizeForBottomTextView), range: NSRange(location: 0, length: bottomAttributed.length))
     bottomTextView.attributedText = bottomAttributed
     bottomTextView.textAlignment = .center
-
-       
 
     }
     
@@ -200,9 +199,7 @@ class MemeViewController: UIViewController {
         let image = renderer.image { (imageRendererContext) in
             memeView.layer.render(in: imageRendererContext.cgContext)
         }
-        print(image)
-            return image
-        
+        return image
         }
     
     func saveMeme() {
@@ -281,8 +278,20 @@ extension MemeViewController: UITextViewDelegate {
     
     
     func updateTextSize(forCharacters char: Int) {
+        var size: CGFloat = getSizeFor(length: char)
+       
+        if bottomTextView.isFirstResponder {
+        bottomTextView.font = bottomTextView.font?.withSize(size)
+            sizeForBottomTextView = size
+        } else {
+        topTextView.font = topTextView.font?.withSize(size)
+            sizeForTopTextView = size
+        }
+    }
+    
+    func getSizeFor(length: Int) -> CGFloat {
         var size: CGFloat = 0
-        switch char {
+        switch length {
         case 0...25:
             size = 30
         case 26...40:
@@ -292,14 +301,7 @@ extension MemeViewController: UITextViewDelegate {
         default:
             size = 22
         }
-           print(char)
-        if bottomTextView.isFirstResponder {
-        bottomTextView.font = bottomTextView.font?.withSize(size)
-            sizeForBottomTextView = size
-        } else {
-        topTextView.font = topTextView.font?.withSize(size)
-            sizeForTopTextView = size
-        }
+        return size
     }
     
     
