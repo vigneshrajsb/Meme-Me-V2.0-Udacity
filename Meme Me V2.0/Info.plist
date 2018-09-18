@@ -2,6 +2,18 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>To add the Memes you save</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Give access to Photo Library to select pictures to create Memes</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Impact.ttf</string>
+	</array>
+	<key>CFBundleDisplayName</key>
+	<string></string>
+	<key>NSCameraUsageDescription</key>
+	<string>Give access to Camera to snap pictures and make awesome Memes</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
