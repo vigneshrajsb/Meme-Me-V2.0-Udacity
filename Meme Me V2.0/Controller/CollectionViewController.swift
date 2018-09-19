@@ -70,8 +70,14 @@ class CollectionViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        prepareSegueToMemeEditor(for: segue, sender: sender)
+        if segue.identifier == segueCollectiontoDetail {
+            if let detailVC = segue.destination as? DetailViewController {
+                detailVC.selectedMeme = sender as? Meme
+            }
+        }
     }
+    
+
 }
 
 
@@ -98,15 +104,19 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath)
-        cell.backgroundColor = .red
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as? MemeCollectionViewCell {
+        cell.memeImageView.image = savedMemes[indexPath.row].memedImage
         return cell
+        }
+        return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
+        performSegue(withIdentifier: segueCollectiontoDetail, sender: savedMemes[indexPath.row])
     }
     
+
     
     
 }

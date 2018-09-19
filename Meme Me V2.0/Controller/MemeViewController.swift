@@ -10,6 +10,8 @@ import UIKit
 
 class MemeViewController: UIViewController {
     
+    let defaultValueForTextView: String = "ENTER TEXT"
+    
     @IBOutlet weak var constraintHeightForBottomTextView: NSLayoutConstraint!
     @IBOutlet weak var memeView: UIView!
     @IBOutlet weak var popUpView: UIView!
@@ -33,6 +35,7 @@ class MemeViewController: UIViewController {
     var shareButton: UIBarButtonItem!
     
     var selectedImage: UIImage?
+    var memeToEdit: Meme?
     let picker = UIPickerView()
     
     var attributes: [NSAttributedString.Key: Any] = [NSAttributedString.Key.font: UIFont(name: "Impact", size: 30.0),
@@ -67,7 +70,15 @@ class MemeViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = true
         topTextView.delegate = self
         bottomTextView.delegate = self
-        
+        if let memeToEdit = memeToEdit {
+            memeImageView.image = memeToEdit.image
+            topTextView.text = memeToEdit.topText
+            bottomTextView.text = memeToEdit.bottomText
+        } else {
+            memeImageView.image = selectedImage
+            topTextView.attributedText = NSMutableAttributedString(string: defaultValueForTextView, attributes: attributes)
+            bottomTextView.attributedText = NSMutableAttributedString(string: defaultValueForTextView, attributes: attributes)
+        }
       setTextViewAttributes()
         
         fontTextField.delegate = self
@@ -77,8 +88,8 @@ class MemeViewController: UIViewController {
         if let selectedImage = selectedImage {
             memeImageView.image = selectedImage
         }
-        //selectedImage = UIImage(named: "Red")
-        memeImageView.image = selectedImage
+       
+   
             setupTextFieldsForPopUp()
         setupObserversForKeyboard()
         
@@ -130,7 +141,6 @@ class MemeViewController: UIViewController {
     }
     
     func setLayout() {
-        print("set layout")
         if UIDevice.current.orientation.isPortrait {
             sizeForMemeView = view.safeAreaLayoutGuide.layoutFrame.width
              sizeForPopUp = sizeForMemeView - sizeForMemeView/9
@@ -151,18 +161,19 @@ class MemeViewController: UIViewController {
 
     
     func setTextViewAttributes() {
-    let topAttributed =  NSMutableAttributedString(string: topTextView.text, attributes: attributes)
+        sizeForTopTextView = getSizeFor(length: topTextView.attributedText.length)
+        let topAttributed =  NSMutableAttributedString(string: topTextView.text, attributes: attributes)
         topAttributed.addAttribute(NSAttributedString.Key.font, value: getFontFromString(string: selectedFont).withSize(sizeForTopTextView), range: NSRange(location: 0, length: topAttributed.length))
-    topTextView.attributedText = topAttributed
-    topTextView.textAlignment = .center
-      
-    
-    let bottomAttributed = NSMutableAttributedString(string: bottomTextView.text, attributes: attributes)
+        topTextView.attributedText = topAttributed
+        topTextView.textAlignment = .center
+        
+        sizeForTopTextView = getSizeFor(length: bottomTextView.attributedText.length)
+        let bottomAttributed = NSMutableAttributedString(string: bottomTextView.text, attributes: attributes)
         bottomAttributed.addAttribute(NSAttributedString.Key.font
             , value: getFontFromString(string: selectedFont).withSize(sizeForBottomTextView), range: NSRange(location: 0, length: bottomAttributed.length))
-    bottomTextView.attributedText = bottomAttributed
-    bottomTextView.textAlignment = .center
-
+        bottomTextView.attributedText = bottomAttributed
+        bottomTextView.textAlignment = .center
+        
     }
     
     func setupNavBar() {
@@ -215,6 +226,8 @@ class MemeViewController: UIViewController {
     
     @objc func optionsTapped() {
          view.endEditing(true)
+        constraintPopUpWidth.constant = 0
+        constraintPopUpHeight.constant = 0
         UIView.animate(withDuration: 0.3) {
             self.backgroundView.alpha = 0.5
             self.popUpView.alpha = 1.0
@@ -254,13 +267,22 @@ extension MemeViewController: UITextViewDelegate {
         }
        
         if let textString = textView.text {
-             updateTextSize(forCharacters: textString.count)
+
               if textString.count > maxCharactersAllowedForMemeText && text != "" {
                 textView.shake()
              return false
             }
         }
-        return true
+       
+        let existingText = textView.text as NSString
+        let updatedText =  existingText.replacingCharacters(in: range, with: text)
+
+        let updateToAttributeText = NSMutableAttributedString(string: updatedText, attributes: attributes)
+        textView.attributedText = updateToAttributeText
+        updateTextSize(forCharacters: updateToAttributeText.length)
+        textView.textAlignment = .center
+
+        return false
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -273,12 +295,13 @@ extension MemeViewController: UITextViewDelegate {
         if textView.text == "" {
             textView.text = "ENTER TEXT"
         }
+        
     }
     
     
     
     func updateTextSize(forCharacters char: Int) {
-        var size: CGFloat = getSizeFor(length: char)
+        let size: CGFloat = getSizeFor(length: char)
        
         if bottomTextView.isFirstResponder {
         bottomTextView.font = bottomTextView.font?.withSize(size)
@@ -294,9 +317,9 @@ extension MemeViewController: UITextViewDelegate {
         switch length {
         case 0...25:
             size = 30
-        case 26...40:
+        case 26...50:
             size = 26
-        case 41...50:
+        case 41...70:
             size = 22
         default:
             size = 22
@@ -396,13 +419,14 @@ extension MemeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+       
         if fontTextField.isFirstResponder {
-        return fonts[row]
+            return fonts[row]
         } else {
             return colors[row]
         }
-        
     }
+    
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         

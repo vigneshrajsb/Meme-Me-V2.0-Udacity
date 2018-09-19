@@ -12,12 +12,13 @@ import UIKit
 let customBlue = UIColor(red: 57/255, green: 67/255, blue: 124/255, alpha: 1.0)
 let customYellow = UIColor(red: 255/255, green: 244/255, blue: 136/255, alpha: 1.0)
 
-let maxCharactersAllowedForMemeText = 50
+let maxCharactersAllowedForMemeText = 70
 
 let segueFromTableView = "tableToEditor"
 let segueFromCollectionView = "collectionToEditor"
 let segueToDetailFromTable = "listToDetail"
 let segueDetailToEditor = "detailToEditor"
+let segueCollectiontoDetail = "collectionToDetail"
 
 
 func removeNavBarBorder(for navigationController: UINavigationController) {

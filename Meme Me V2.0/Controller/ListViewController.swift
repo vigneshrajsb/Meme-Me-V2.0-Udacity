@@ -34,7 +34,7 @@ class ListViewController: UIViewController {
         let meme4 = UIImage(named: "meme4")
         
         savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!))
-        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image", bottomText: "Meme 2 bottom Text", dateSaved: Date(), memedImage: meme2!))
+        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom Text for medium length", dateSaved: Date(), memedImage: meme2!))
         savedMemes.append(Meme(image: meme3!, topText: "Meme 3 Image", bottomText: "camera bottom Text", dateSaved: Date(), memedImage: meme3!))
         savedMemes.append(Meme(image: meme4!, topText: "album Image", bottomText: "album bottom Text", dateSaved: Date(), memedImage: meme4!))
         
@@ -87,7 +87,15 @@ class ListViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == segueFromTableView {
       prepareSegueToMemeEditor(for: segue, sender: sender)
+        } else if segue.identifier == segueToDetailFromTable {
+            if let detailVC = segue.destination as? DetailViewController {
+                detailVC.selectedMeme = sender as? Meme
+            }
+            
+            
+        }
         
     }
 }
@@ -116,22 +124,28 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = memeList.dequeueReusableCell(withIdentifier: "tableCell") {
-            cell.imageView!.image = savedMemes[indexPath.row].image
-            cell.textLabel?.text = savedMemes[indexPath.row].topText
-          return cell
+        
+        if let cell = memeList.dequeueReusableCell(withIdentifier: "tableCell") as? MemeTableViewCell {
+             let meme = savedMemes[indexPath.row]
+            cell.memeImageView.image = meme.memedImage
+            cell.memeTextLabel.text = "\(meme.topText) - \(meme.bottomText)"
+            cell.dateLabel.text = "18"
+            cell.monthLabel.text = "Sep"
+            cell.yearLabel.text = "2018"
+            return cell
         }
         return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: segueToDetailFromTable, sender: self)
+        performSegue(withIdentifier: segueToDetailFromTable, sender: savedMemes[indexPath.row])
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
+    
     
     
 }
