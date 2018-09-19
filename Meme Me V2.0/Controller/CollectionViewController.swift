@@ -28,6 +28,10 @@ class CollectionViewController: UIViewController {
         memeCollectionView.collectionViewLayout.invalidateLayout()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        memeCollectionView.reloadData()
+    }
+    
     func initializeUI() {
         topView.backgroundColor = customBlue
         if let navigationController = navigationController {
@@ -75,7 +79,9 @@ class CollectionViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == segueCollectiontoDetail {
+        if segue.identifier == segueFromCollectionView {
+            prepareSegueToMemeEditor(for: segue, sender: sender)
+        } else if segue.identifier == segueCollectiontoDetail {
             if let detailVC = segue.destination as? DetailViewController {
                 detailVC.selectedMeme = sender as? Meme
             }

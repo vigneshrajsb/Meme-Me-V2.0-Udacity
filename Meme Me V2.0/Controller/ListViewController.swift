@@ -27,6 +27,10 @@ class ListViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        memeList.reloadData()
+    }
+    
     func createTestDate() {
         let meme1 = UIImage(named: "meme1")
         let meme2 = UIImage(named: "meme2")

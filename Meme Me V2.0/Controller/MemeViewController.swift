@@ -198,6 +198,7 @@ class MemeViewController: UIViewController {
         activityVC.completionWithItemsHandler = { (activityChosen, completed, items, error) in
             if completed {
                 self.saveMeme()
+                self.navigationController?.popViewController(animated: true)
             }
         }
         
