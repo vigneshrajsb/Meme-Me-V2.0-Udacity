@@ -37,7 +37,10 @@ class ListViewController: UIViewController {
         savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom Text for medium length", dateSaved: Date(), memedImage: meme2!))
         savedMemes.append(Meme(image: meme3!, topText: "Meme 3 Image", bottomText: "camera bottom Text", dateSaved: Date(), memedImage: meme3!))
         savedMemes.append(Meme(image: meme4!, topText: "album Image", bottomText: "album bottom Text", dateSaved: Date(), memedImage: meme4!))
-        
+        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!))
+        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom Text for medium length", dateSaved: Date(), memedImage: meme2!))
+        savedMemes.append(Meme(image: meme3!, topText: "Meme 3 Image", bottomText: "camera bottom Text", dateSaved: Date(), memedImage: meme3!))
+        savedMemes.append(Meme(image: meme4!, topText: "album Image", bottomText: "album bottom Text", dateSaved: Date(), memedImage: meme4!))
     }
     
     func initializeUI() {
@@ -45,7 +48,7 @@ class ListViewController: UIViewController {
         if  let navigationController = navigationController  {
             removeNavBarBorder(for: navigationController)
         }
-        setupGestures()
+       // setupGestures()
         setupImagePicker()
     }
     
@@ -143,9 +146,30 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 100
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == UITableViewCell.EditingStyle.delete) {
+            // handle delete (by removing the data from your array and updating the tableview)
+            let alert = UIAlertController(title: "Delete Meme", message: "Are you sure you want to delete this Meme?", preferredStyle: .alert)
+            let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (action) in
+                savedMemes.remove(at: indexPath.row)
+                  self.memeList.reloadData()
+            }
+            let cancelAction = UIAlertAction(title: "Cancel", style: .default) 
+            
+            alert.addAction(deleteAction)
+            alert.addAction(cancelAction)
+            present(alert, animated: true, completion: nil)
+            
+          
+          
+        }
+    }
     
 }

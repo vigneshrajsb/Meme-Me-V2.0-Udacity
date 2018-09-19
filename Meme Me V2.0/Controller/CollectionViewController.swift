@@ -23,12 +23,17 @@ class CollectionViewController: UIViewController {
         initializeUI()
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        memeCollectionView.collectionViewLayout.invalidateLayout()
+    }
+    
     func initializeUI() {
         topView.backgroundColor = customBlue
         if let navigationController = navigationController {
             removeNavBarBorder(for: navigationController)
         }
-        setupGestures()
+      //  setupGestures()
         setupImagePicker()
     }
     
@@ -98,7 +103,7 @@ extension CollectionViewController: UIImagePickerControllerDelegate, UINavigatio
     
 }
 
-extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return savedMemes.count
     }
@@ -116,7 +121,12 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
         performSegue(withIdentifier: segueCollectiontoDetail, sender: savedMemes[indexPath.row])
     }
     
-
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let viewWidth = self.view.safeAreaLayoutGuide.layoutFrame.width
+        
+        let cellWidth = UIDevice.current.orientation.isPortrait ? viewWidth/3 : viewWidth/4
+        return CGSize(width: cellWidth, height: cellWidth)
+    }
     
     
 }

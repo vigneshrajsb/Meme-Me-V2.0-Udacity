@@ -111,42 +111,54 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="100.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XHE-Kr-a0u">
-                                                    <rect key="frame" x="6" y="-1" width="100" height="100"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XHE-Kr-a0u">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100.5" height="100.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="XHE-Kr-a0u" secondAttribute="height" multiplier="1:1" id="lMj-uf-Zxu"/>
+                                                    </constraints>
                                                 </imageView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="2nP-7U-kwZ">
-                                                    <rect key="frame" x="330" y="10" width="32.5" height="74.5"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="-5" translatesAutoresizingMaskIntoConstraints="NO" id="2nP-7U-kwZ">
+                                                    <rect key="frame" x="332.5" y="5" width="32.5" height="90.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ary-Rx-Ej8">
-                                                            <rect key="frame" x="0.0" y="0.0" width="32.5" height="17"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="32.5" height="33.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="31" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pVD-Ah-r7w">
-                                                            <rect key="frame" x="0.0" y="21" width="32.5" height="32.5"/>
-                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="27"/>
+                                                            <rect key="frame" x="0.0" y="28.5" width="32.5" height="33.5"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2018" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cfn-mF-mTK">
-                                                            <rect key="frame" x="0.0" y="57.5" width="32.5" height="17"/>
+                                                            <rect key="frame" x="0.0" y="57" width="32.5" height="33.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                 </stackView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="This label will have the top text of the meme - and the bottom text combined" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aW8-km-OAq">
-                                                    <rect key="frame" x="114" y="0.0" width="205" height="101"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This label will have the top text of the meme - and the bottom text " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aW8-km-OAq">
+                                                    <rect key="frame" x="110.5" y="23.5" width="212" height="54"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="2nP-7U-kwZ" secondAttribute="trailing" constant="10" id="3kN-yW-65r"/>
+                                                <constraint firstAttribute="bottom" secondItem="2nP-7U-kwZ" secondAttribute="bottom" constant="5" id="Hqb-x5-i1P"/>
+                                                <constraint firstItem="2nP-7U-kwZ" firstAttribute="centerY" secondItem="bbP-O5-gnA" secondAttribute="centerY" id="Vg4-rC-Tnj"/>
+                                                <constraint firstItem="2nP-7U-kwZ" firstAttribute="top" secondItem="bbP-O5-gnA" secondAttribute="top" constant="5" id="ZYi-bB-5KM"/>
+                                                <constraint firstAttribute="bottom" secondItem="XHE-Kr-a0u" secondAttribute="bottom" id="bUM-Cq-K8n"/>
+                                                <constraint firstItem="aW8-km-OAq" firstAttribute="leading" secondItem="XHE-Kr-a0u" secondAttribute="trailing" constant="10" id="d2U-lO-qug"/>
+                                                <constraint firstItem="2nP-7U-kwZ" firstAttribute="leading" secondItem="aW8-km-OAq" secondAttribute="trailing" constant="10" id="kRS-mb-ns4"/>
+                                                <constraint firstItem="aW8-km-OAq" firstAttribute="centerY" secondItem="bbP-O5-gnA" secondAttribute="centerY" id="kzl-VC-ey8"/>
+                                                <constraint firstItem="XHE-Kr-a0u" firstAttribute="leading" secondItem="bbP-O5-gnA" secondAttribute="leading" id="qcA-0m-tx4"/>
+                                                <constraint firstItem="XHE-Kr-a0u" firstAttribute="top" secondItem="bbP-O5-gnA" secondAttribute="top" id="qdB-Lt-qbe"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="dateLabel" destination="pVD-Ah-r7w" id="XSX-Nu-Ki8"/>
@@ -535,7 +547,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="U6E-fo-3nY">
                                 <rect key="frame" x="0.0" y="120" width="375" height="434"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Qdc-Cb-1qu">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Qdc-Cb-1qu">
                                     <size key="itemSize" width="181" height="181"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -608,7 +620,7 @@
         <image name="table" width="22.5" height="22.5"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="5eR-ao-ab6"/>
-        <segue reference="sOf-SA-tBr"/>
+        <segue reference="RAL-mA-bbm"/>
+        <segue reference="ixM-GM-SKL"/>
     </inferredMetricsTieBreakers>
 </document>
