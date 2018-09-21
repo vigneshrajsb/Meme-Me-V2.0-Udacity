@@ -10,6 +10,7 @@ import UIKit
 
 class CollectionViewController: UIViewController {
     
+    @IBOutlet weak var constraintForTopView: NSLayoutConstraint!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var camera: UIButton!
     @IBOutlet weak var album: UIButton!
@@ -25,11 +26,20 @@ class CollectionViewController: UIViewController {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
+        guard  tabBarController?.selectedIndex == 1 else { return }
+        setupLayout()
+        
+    }
+    
+    func setupLayout() {
         memeCollectionView.collectionViewLayout.invalidateLayout()
+        assignHeightValue(for: constraintForTopView)
+        print(constraintForTopView.constant)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         memeCollectionView.reloadData()
+        setupLayout()
     }
     
     func initializeUI() {
@@ -119,8 +129,10 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let viewWidth = self.view.safeAreaLayoutGuide.layoutFrame.width
         
-        let cellWidth = UIDevice.current.orientation.isLandscape ? viewWidth/4 : viewWidth/3
-        
+        var cellWidth = UIDevice.current.orientation.isLandscape ? viewWidth/5 : viewWidth/3
+        if UIDevice.current.orientation.isFlat {
+            cellWidth = UIApplication.shared.statusBarOrientation.isLandscape ? viewWidth/5 : viewWidth/3
+        }
         return CGSize(width: cellWidth, height: cellWidth)
     }
     

@@ -12,6 +12,8 @@ var savedMemes: [Meme] = []
 
 class ListViewController: UIViewController {
     
+    @IBOutlet weak var constraintTopViewHeight: NSLayoutConstraint!
+    
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var camera: UIButton!
     @IBOutlet weak var album: UIButton!
@@ -29,6 +31,15 @@ class ListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         memeList.reloadData()
+        assignHeightValue(for: constraintTopViewHeight)
+        print(constraintTopViewHeight.constant)
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+      
+        guard tabBarController?.selectedIndex == 0 else { return }
+        assignHeightValue(for: constraintTopViewHeight)
     }
     
     func createTestDate() {
@@ -37,29 +48,48 @@ class ListViewController: UIViewController {
         let meme3 = UIImage(named: "meme3")
         let meme4 = UIImage(named: "meme4")
         
-        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!))
-        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom Text for medium length", dateSaved: Date(), memedImage: meme2!))
-        savedMemes.append(Meme(image: meme3!, topText: "Meme 3 Image", bottomText: "camera bottom Text", dateSaved: Date(), memedImage: meme3!))
-        savedMemes.append(Meme(image: meme4!, topText: "album Image", bottomText: "album bottom Text", dateSaved: Date(), memedImage: meme4!))
-        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!))
-        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom Text for medium length", dateSaved: Date(), memedImage: meme2!))
-        savedMemes.append(Meme(image: meme3!, topText: "Meme 3 Image", bottomText: "camera bottom Text", dateSaved: Date(), memedImage: meme3!))
-        savedMemes.append(Meme(image: meme4!, topText: "album Image", bottomText: "album bottom Text", dateSaved: Date(), memedImage: meme4!))
+        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!, font: "IMPACT", color: "RED", border: "BLUE"))
+           savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom", dateSaved: Date(), memedImage: meme2!, font: "FUTURA", color: "BLUE", border: "YELLOW"))
+        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!, font: "IMPACT", color: "RED", border: "BLUE"))
+        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom", dateSaved: Date(), memedImage: meme2!, font: "FUTURA", color: "BLUE", border: "YELLOW"))
+        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!, font: "IMPACT", color: "RED", border: "BLUE"))
+        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom", dateSaved: Date(), memedImage: meme2!, font: "FUTURA", color: "BLUE", border: "YELLOW"))
+        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!, font: "IMPACT", color: "RED", border: "BLUE"))
+        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom", dateSaved: Date(), memedImage: meme2!, font: "FUTURA", color: "BLUE", border: "YELLOW"))
+        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!, font: "IMPACT", color: "RED", border: "BLUE"))
+        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom", dateSaved: Date(), memedImage: meme2!, font: "FUTURA", color: "BLUE", border: "YELLOW"))
+        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!, font: "IMPACT", color: "RED", border: "BLUE"))
+        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom", dateSaved: Date(), memedImage: meme2!, font: "FUTURA", color: "BLUE", border: "YELLOW"))
+        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!, font: "IMPACT", color: "RED", border: "BLUE"))
+        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom", dateSaved: Date(), memedImage: meme2!, font: "FUTURA", color: "BLUE", border: "YELLOW"))
+        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!, font: "IMPACT", color: "RED", border: "BLUE"))
+        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom", dateSaved: Date(), memedImage: meme2!, font: "FUTURA", color: "BLUE", border: "YELLOW"))
+        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!, font: "IMPACT", color: "RED", border: "BLUE"))
+        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom", dateSaved: Date(), memedImage: meme2!, font: "FUTURA", color: "BLUE", border: "YELLOW"))
+        
+       
     }
     
     func initializeUI() {
         topView.backgroundColor = customBlue
         if  let navigationController = navigationController  {
+            print("in nav block")
             removeNavBarBorder(for: navigationController)
+            if let font = UIFont(name: "PhosphateSolid", size: 30.0) {
+                navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: UIColor.white]
+                
+                print("font found")
+//                let viewTest = UIView(frame: CGRect(x: 0, y: 0, width: 150, height: 35))
+//                viewTest.addSubview(label)
+                let label = UILabel(frame: CGRect(x: 0, y: 0, width: navigationController.navigationBar.frame.width, height: navigationController.navigationBar.frame.height))
+                label.textAlignment = .center
+                label.attributedText = NSAttributedString(string: "MEME ME", attributes: [NSAttributedString.Key.font: UIFont(name: "PhosphateSolid", size: 25.0) ])
+                label.textColor = customYellow
+              //  navigationController.navigationItem.title = ""
+                navigationController.navigationBar.addSubview(label)
+            }
         }
         
-//        let shadowPath = UIBezierPath(rect: topView.bounds).cgPath
-//        topView.layer.shadowColor = UIColor(white: 0.3, alpha: 1.0).cgColor
-//        topView.layer.shadowOffset = CGSize(width: 3, height: 3)
-//        topView.layer.shadowOpacity = 1.0
-//        topView.layer.masksToBounds = false
-//        topView.layer.shadowPath = shadowPath
-//        topView.layer.shadowRadius = 2
         topView.createShadow()
         setupImagePicker()
     }
@@ -147,7 +177,7 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return constraintTopViewHeight.constant - 20
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

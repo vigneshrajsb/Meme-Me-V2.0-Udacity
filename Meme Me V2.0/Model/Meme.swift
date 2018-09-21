@@ -15,12 +15,19 @@ struct Meme {
     var bottomText: String
     var dateSaved: Date
     var memedImage: UIImage
-    
-    public init(image: UIImage, topText: String, bottomText: String, dateSaved: Date, memedImage: UIImage){
+    var font: String
+    var color: String
+    var border: String
+
+    public init(image: UIImage, topText: String, bottomText: String, dateSaved: Date, memedImage: UIImage, font: String, color: String, border: String){
         self.image = image
         self.topText = topText
         self.bottomText = bottomText
         self.dateSaved = dateSaved
         self.memedImage = memedImage
+        self.font = font
+        self.color = color
+        self.border = border
+        
     }
 }

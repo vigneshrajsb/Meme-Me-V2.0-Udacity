@@ -13,14 +13,11 @@ extension UIView {
     
     func createShadow() {
         layer.masksToBounds = false
-        layer.shadowColor = customBlue.cgColor
-        layer.shadowOpacity = 0.5
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOpacity = 0.8
         layer.shadowRadius = 3
         layer.shadowOffset = CGSize.zero
-      
-        
         layer.shouldRasterize = true
-        
     }
     
 }

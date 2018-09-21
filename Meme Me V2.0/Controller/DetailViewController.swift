@@ -37,14 +37,12 @@ class DetailViewController: UIViewController {
         
         if let selectedMeme = selectedMeme {
             memeDetailIimageView.image = selectedMeme.memedImage
-            print(selectedMeme.topText)
-            print(selectedMeme.bottomText)
-            print(selectedMeme.dateSaved)
         }
     }
 
     @objc func shareTapped() {
-        let activityVC = UIActivityViewController(activityItems: [UIImage(named: "meme1")], applicationActivities: nil)
+        guard let imageAToShare = memeDetailIimageView.image else { return }
+        let activityVC = UIActivityViewController(activityItems: [imageAToShare], applicationActivities: nil)
         present(activityVC, animated: true)
         
         print("share tapped")

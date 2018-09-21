@@ -27,15 +27,16 @@ func removeNavBarBorder(for navigationController: UINavigationController) {
     navBar.shadowImage = UIImage()
 }
 
-func tabBarAnimation(leftToRight : Bool) -> CATransition {
-    let animation = CATransition()
-    animation.type = .reveal
-    animation.subtype = leftToRight ? CATransitionSubtype.fromLeft : .fromRight
-    animation.duration = 0.5
-    animation.timingFunction = CAMediaTimingFunction.init(name: .easeInEaseOut)
-    return animation
-}
 
+func assignHeightValue(for constraint: NSLayoutConstraint) {
+    if UIDevice.current.orientation.isLandscape {
+        constraint.constant = 100
+    } else if UIDevice.current.orientation.isFlat {
+        constraint.constant =  UIApplication.shared.statusBarOrientation.isLandscape ? 100 : 120
+    } else {
+        constraint.constant = 120
+    }
+}
 
 func prepareSegueToMemeEditor(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == segueFromTableView || segue.identifier == segueFromCollectionView  {

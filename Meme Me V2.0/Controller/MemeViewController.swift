@@ -74,6 +74,9 @@ class MemeViewController: UIViewController {
             memeImageView.image = memeToEdit.image
             topTextView.text = memeToEdit.topText
             bottomTextView.text = memeToEdit.bottomText
+            selectedFont = memeToEdit.font
+            selectedColor = memeToEdit.color
+            selectedStrokeColor = memeToEdit.border
             print("meme object")
         } else if (selectedImage != nil){
             memeImageView.image = selectedImage
@@ -177,6 +180,7 @@ class MemeViewController: UIViewController {
     
     func setTextViewAttributes() {
         sizeForTopTextView = getSizeFor(length: topTextView.attributedText.length)
+        updateTextAttributes(font: selectedFont, color: selectedColor, strokeColor: selectedStrokeColor)
         let topAttributed =  NSMutableAttributedString(string: topTextView.text, attributes: attributes)
         topAttributed.addAttribute(NSAttributedString.Key.font, value: getFontFromString(string: selectedFont).withSize(sizeForTopTextView), range: NSRange(location: 0, length: topAttributed.length))
         topTextView.attributedText = topAttributed
@@ -233,7 +237,7 @@ class MemeViewController: UIViewController {
         print("Save Meme")
         guard let image = memeImageView.image else { return }
         
-        let meme = Meme(image: image, topText: topTextView.text, bottomText: bottomTextView.text, dateSaved: Date(), memedImage: generateMemeImage())
+        let meme = Meme(image: image, topText: topTextView.text, bottomText: bottomTextView.text, dateSaved: Date(), memedImage: generateMemeImage(),font: selectedFont, color: selectedColor, border: selectedStrokeColor)
         
         savedMemes.append(meme)
         print(savedMemes.count)
@@ -285,13 +289,16 @@ extension MemeViewController: UITextViewDelegate {
         if let textString = textView.text {
 
               if textString.count > maxCharactersAllowedForMemeText && text != "" {
+                let generator = UINotificationFeedbackGenerator()
                 textView.shake()
+                generator.notificationOccurred(.warning)
              return false
             }
         }
        
         let existingText = textView.text as NSString
-        let updatedText =  existingText.replacingCharacters(in: range, with: text)
+        let updatedText =  existingText.replacingCharacters(in: range, with: text.capitalized)
+        
 
         let updateToAttributeText = NSMutableAttributedString(string: updatedText, attributes: attributes)
         textView.attributedText = updateToAttributeText
@@ -467,10 +474,17 @@ extension MemeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
             strokeColorTextField.text = selectedStrokeColor
             attributes[NSAttributedString.Key.strokeColor] = getColorFromString(string: selectedStrokeColor)
         }
-        
-       sampleLabel.attributedText = NSAttributedString(string: sampleLabel.text ?? "SAMPLE TEXT", attributes: attributes)
-        
+           sampleLabel.attributedText = NSAttributedString(string: sampleLabel.text ?? "SAMPLE TEXT", attributes: attributes)
     }
+    
+    func updateTextAttributes(font: String, color: String, strokeColor: String) {
+        attributes[NSAttributedString.Key.font] = getFontFromString(string: font)
+        attributes[NSAttributedString.Key.foregroundColor] = getColorFromString(string: color)
+        attributes[NSAttributedString.Key.strokeColor] = getColorFromString(string: strokeColor)
+    }
+ 
+        
+    
 
     
 }

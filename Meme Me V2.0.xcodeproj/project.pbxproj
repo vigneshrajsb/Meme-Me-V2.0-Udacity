@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		504EC5CF2154D17E00562F5A /* PhosphateSolid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 504EC5CE2154D17E00562F5A /* PhosphateSolid.ttf */; };
+		506A579B2154E10000263137 /* TipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506A579A2154E10000263137 /* TipsViewController.swift */; };
 		506A9F4E21549B58001803F9 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506A9F4D21549B58001803F9 /* UIViewExtension.swift */; };
 		5071414121477DAC0036E7E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5071414021477DAC0036E7E3 /* AppDelegate.swift */; };
 		5071414621477DAC0036E7E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5071414421477DAC0036E7E3 /* Main.storyboard */; };
@@ -26,6 +28,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		504EC5CE2154D17E00562F5A /* PhosphateSolid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PhosphateSolid.ttf; sourceTree = "<group>"; };
+		506A579A2154E10000263137 /* TipsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipsViewController.swift; sourceTree = "<group>"; };
 		506A9F4D21549B58001803F9 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		5071413D21477DAC0036E7E3 /* Meme Me V2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Meme Me V2.0.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5071414021477DAC0036E7E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +61,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		506A57992154DE3800263137 /* Tips-Controller */ = {
+			isa = PBXGroup;
+			children = (
+				506A579A2154E10000263137 /* TipsViewController.swift */,
+			);
+			path = "Tips-Controller";
+			sourceTree = "<group>";
+		};
 		5071413421477DAB0036E7E3 = {
 			isa = PBXGroup;
 			children = (
@@ -76,6 +88,7 @@
 		5071413F21477DAC0036E7E3 /* Meme Me V2.0 */ = {
 			isa = PBXGroup;
 			children = (
+				506A57992154DE3800263137 /* Tips-Controller */,
 				5084E96F214EE4F600B66824 /* Controller */,
 				5084E96E214EE4DD00B66824 /* View */,
 				5084E96D214EE4CF00B66824 /* Model */,
@@ -101,6 +114,7 @@
 		5084E96C214EE4BE00B66824 /* Fonts Files */ = {
 			isa = PBXGroup;
 			children = (
+				504EC5CE2154D17E00562F5A /* PhosphateSolid.ttf */,
 				5084E96A214EE4B100B66824 /* Impact.ttf */,
 			);
 			path = "Fonts Files";
@@ -199,6 +213,7 @@
 				5071414B21477DAE0036E7E3 /* LaunchScreen.storyboard in Resources */,
 				5071414821477DAE0036E7E3 /* Assets.xcassets in Resources */,
 				507F59092148E90900D57845 /* Tips.storyboard in Resources */,
+				504EC5CF2154D17E00562F5A /* PhosphateSolid.ttf in Resources */,
 				5071414621477DAC0036E7E3 /* Main.storyboard in Resources */,
 				5084E96B214EE4B100B66824 /* Impact.ttf in Resources */,
 			);
@@ -213,6 +228,7 @@
 			files = (
 				50C2B333215216230045CD4B /* MemeCollectionViewCell.swift in Sources */,
 				50B59FC32150D8F800DED84C /* DetailViewController.swift in Sources */,
+				506A579B2154E10000263137 /* TipsViewController.swift in Sources */,
 				506A9F4E21549B58001803F9 /* UIViewExtension.swift in Sources */,
 				50759BC0214A3C8900FCCBC8 /* CollectionViewController.swift in Sources */,
 				50D373C9214CB0B10084FA9E /* MemeViewController.swift in Sources */,

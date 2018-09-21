@@ -9,9 +9,8 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>Impact.ttf</string>
+		<string>PhosphateSolid.ttf</string>
 	</array>
-	<key>CFBundleDisplayName</key>
-	<string></string>
 	<key>NSCameraUsageDescription</key>
 	<string>Give access to Camera to snap pictures and make awesome Memes</string>
 	<key>CFBundleDevelopmentRegion</key>
