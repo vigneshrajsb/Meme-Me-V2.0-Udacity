@@ -52,24 +52,21 @@ class ListViewController: UIViewController {
         if  let navigationController = navigationController  {
             removeNavBarBorder(for: navigationController)
         }
-       // setupGestures()
+        
+//        let shadowPath = UIBezierPath(rect: topView.bounds).cgPath
+//        topView.layer.shadowColor = UIColor(white: 0.3, alpha: 1.0).cgColor
+//        topView.layer.shadowOffset = CGSize(width: 3, height: 3)
+//        topView.layer.shadowOpacity = 1.0
+//        topView.layer.masksToBounds = false
+//        topView.layer.shadowPath = shadowPath
+//        topView.layer.shadowRadius = 2
+        topView.createShadow()
         setupImagePicker()
     }
     
     func setupImagePicker() {
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
-    }
-    
-    func setupGestures() {
-        let rightToLeftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(swipedLeft))
-        rightToLeftSwipe.direction = .left
-        self.view.addGestureRecognizer(rightToLeftSwipe)
-    }
-    
-    @objc func swipedLeft() {
-        tabBarController?.selectedIndex = 1
-        tabBarController?.view.layer.add(tabBarAnimation(leftToRight: false), forKey: "revealCollection")
     }
     
     @IBAction func cameraTapped(_ sender: UIButton) {

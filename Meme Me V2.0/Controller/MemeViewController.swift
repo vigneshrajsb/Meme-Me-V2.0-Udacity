@@ -74,10 +74,22 @@ class MemeViewController: UIViewController {
             memeImageView.image = memeToEdit.image
             topTextView.text = memeToEdit.topText
             bottomTextView.text = memeToEdit.bottomText
-        } else {
+            print("meme object")
+        } else if (selectedImage != nil){
             memeImageView.image = selectedImage
             topTextView.attributedText = NSMutableAttributedString(string: defaultValueForTextView, attributes: attributes)
             bottomTextView.attributedText = NSMutableAttributedString(string: defaultValueForTextView, attributes: attributes)
+            print("meme image from image picker")
+            if let image = selectedImage {
+                print("IMage available")
+            }
+        } else {
+            let alert = UIAlertController(title: "Error", message: "wrong", preferredStyle: .alert)
+            let action = UIAlertAction(title: "Go back", style: .default) { (action) in
+                self.navigationController?.popViewController(animated: true)
+            }
+            alert.addAction(action)
+            present(alert, animated: true, completion: nil)
         }
       setTextViewAttributes()
         
@@ -102,6 +114,8 @@ class MemeViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
           self.tabBarController?.tabBar.isHidden = false
+        selectedImage = nil
+        memeToEdit = nil
     }
     
     func setupObserversForKeyboard() {
@@ -141,13 +155,14 @@ class MemeViewController: UIViewController {
     }
     
     func setLayout() {
-        if UIDevice.current.orientation.isPortrait {
-            sizeForMemeView = view.safeAreaLayoutGuide.layoutFrame.width
-             sizeForPopUp = sizeForMemeView - sizeForMemeView/9
-        } else if UIDevice.current.orientation.isLandscape {
+        if UIDevice.current.orientation.isLandscape {
             sizeForMemeView = view.safeAreaLayoutGuide.layoutFrame.height
              sizeForPopUp = sizeForMemeView - sizeForMemeView/16
+        } else {
+                sizeForMemeView = view.safeAreaLayoutGuide.layoutFrame.width
+                sizeForPopUp = sizeForMemeView - sizeForMemeView/9
         }
+        
         constraintMemeWidth.constant = sizeForMemeView
         constraintMemeHeight.constant = sizeForMemeView
         constraintPopUpWidth.constant = sizeForPopUp

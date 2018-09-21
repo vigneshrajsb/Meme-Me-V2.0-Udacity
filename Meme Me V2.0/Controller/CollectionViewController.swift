@@ -37,24 +37,13 @@ class CollectionViewController: UIViewController {
         if let navigationController = navigationController {
             removeNavBarBorder(for: navigationController)
         }
-      //  setupGestures()
+        topView.createShadow()
         setupImagePicker()
     }
     
     func setupImagePicker() {
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
-    }
-    
-    func setupGestures() {
-        let leftToRightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(rightSwiped))
-        leftToRightSwipe.direction = .right
-        self.view.addGestureRecognizer(leftToRightSwipe)
-    }
-    
-    @objc func rightSwiped() {
-        tabBarController?.selectedIndex = 0
-        tabBarController?.view.layer.add(tabBarAnimation(leftToRight: true), forKey: "revealList")
     }
     
     @IBAction func cameraTapped(_ sender: UIButton) {
@@ -130,7 +119,8 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let viewWidth = self.view.safeAreaLayoutGuide.layoutFrame.width
         
-        let cellWidth = UIDevice.current.orientation.isPortrait ? viewWidth/3 : viewWidth/4
+        let cellWidth = UIDevice.current.orientation.isLandscape ? viewWidth/4 : viewWidth/3
+        
         return CGSize(width: cellWidth, height: cellWidth)
     }
     
