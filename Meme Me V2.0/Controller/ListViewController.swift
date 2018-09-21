@@ -83,7 +83,8 @@ class ListViewController: UIViewController {
 //                viewTest.addSubview(label)
                 let label = UILabel(frame: CGRect(x: 0, y: 0, width: navigationController.navigationBar.frame.width, height: navigationController.navigationBar.frame.height))
                 label.textAlignment = .center
-                label.attributedText = NSAttributedString(string: "MEME ME", attributes: [NSAttributedString.Key.font: UIFont(name: "PhosphateSolid", size: 25.0) ])
+                
+                label.attributedText = NSAttributedString(string: "MEME ME", attributes: [NSAttributedString.Key.font: UIFont(name: "PhosphateSolid", size: 20.0) ])
                 label.textColor = customYellow
               //  navigationController.navigationItem.title = ""
                 navigationController.navigationBar.addSubview(label)
