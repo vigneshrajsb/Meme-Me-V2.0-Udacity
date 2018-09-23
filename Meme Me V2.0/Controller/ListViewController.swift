@@ -13,7 +13,7 @@ import Realm
 var savedMemes: [Meme] = []
 var results: Results<MemeMe> = {
     let realm = try! Realm()
-    let results = realm.objects(MemeMe.self)
+    let results = realm.objects(MemeMe.self).sorted(byKeyPath: "dateSaved", ascending: false)
     return results
 }()
 
@@ -32,15 +32,11 @@ class ListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeUI()
-        print(UIDevice.current.orientation.isLandscape)
-        print(results.count)
-   
     }
     
     override func viewWillAppear(_ animated: Bool) {
         memeList.reloadData()
         assignHeightValue(for: constraintTopViewHeight)
-        print(constraintTopViewHeight.constant)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -50,34 +46,7 @@ class ListViewController: UIViewController {
         assignHeightValue(for: constraintTopViewHeight)
     }
     
-//    func createTestDate() {
-//        let meme1 = UIImage(named: "meme1")
-//        let meme2 = UIImage(named: "meme2")
-//        let meme3 = UIImage(named: "meme3")
-//        let meme4 = UIImage(named: "meme4")
-//        
-//        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!, font: "IMPACT", color: "RED", border: "BLUE"))
-//           savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom", dateSaved: Date(), memedImage: meme2!, font: "FUTURA", color: "BLUE", border: "YELLOW"))
-//        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!, font: "IMPACT", color: "RED", border: "BLUE"))
-//        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom", dateSaved: Date(), memedImage: meme2!, font: "FUTURA", color: "BLUE", border: "YELLOW"))
-//        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!, font: "IMPACT", color: "RED", border: "BLUE"))
-//        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom", dateSaved: Date(), memedImage: meme2!, font: "FUTURA", color: "BLUE", border: "YELLOW"))
-//        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!, font: "IMPACT", color: "RED", border: "BLUE"))
-//        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom", dateSaved: Date(), memedImage: meme2!, font: "FUTURA", color: "BLUE", border: "YELLOW"))
-//        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!, font: "IMPACT", color: "RED", border: "BLUE"))
-//        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom", dateSaved: Date(), memedImage: meme2!, font: "FUTURA", color: "BLUE", border: "YELLOW"))
-//        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!, font: "IMPACT", color: "RED", border: "BLUE"))
-//        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom", dateSaved: Date(), memedImage: meme2!, font: "FUTURA", color: "BLUE", border: "YELLOW"))
-//        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!, font: "IMPACT", color: "RED", border: "BLUE"))
-//        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom", dateSaved: Date(), memedImage: meme2!, font: "FUTURA", color: "BLUE", border: "YELLOW"))
-//        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!, font: "IMPACT", color: "RED", border: "BLUE"))
-//        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom", dateSaved: Date(), memedImage: meme2!, font: "FUTURA", color: "BLUE", border: "YELLOW"))
-//        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!, font: "IMPACT", color: "RED", border: "BLUE"))
-//        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom", dateSaved: Date(), memedImage: meme2!, font: "FUTURA", color: "BLUE", border: "YELLOW"))
-//        
-//       
-//    }
-//    
+
     func initializeUI() {
         topView.backgroundColor = customBlue
         
@@ -90,7 +59,6 @@ class ListViewController: UIViewController {
             imgView.contentMode = .scaleAspectFit
            self.navigationItem.titleView = imgView
         }
-       
         topView.createShadow()
         setupImagePicker()
     }
@@ -142,9 +110,6 @@ extension ListViewController: UIImagePickerControllerDelegate, UINavigationContr
         if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
              performSegue(withIdentifier: segueFromTableView, sender: image)
         }
-        
-      
-       
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -155,31 +120,25 @@ extension ListViewController: UIImagePickerControllerDelegate, UINavigationContr
 
 extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       // return savedMemes.count
         return results.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if let cell = memeList.dequeueReusableCell(withIdentifier: "tableCell") as? MemeTableViewCell {
-//             let meme = savedMemes[indexPath.row]
-//            cell.memeImageView.image = meme.memedImage
-//            cell.memeTextLabel.text = "\(meme.topText) - \(meme.bottomText)"
-//            cell.dateLabel.text = "18"
-//            cell.monthLabel.text = "Sep"
-//            cell.yearLabel.text = "2018"
             let meme = results[indexPath.row]
             cell.memeImageView.image = UIImage(data: meme.memedImage)
             cell.memeTextLabel.text = "\(meme.topText) - \(meme.bottomText)"
-            cell.dateLabel.text = "18"
-            cell.monthLabel.text = "Sep"
-            cell.yearLabel.text = "2018"
+            cell.dateLabel.text = getDayFrom(date: meme.dateSaved)
+            cell.monthLabel.text = getMonthString(date: meme.dateSaved)
+            cell.yearLabel.text = getYearFrom(date: meme.dateSaved)
             return cell
         }
         return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+         
         performSegue(withIdentifier: segueToDetailFromTable, sender: results[indexPath.row])
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -197,7 +156,10 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
             // handle delete (by removing the data from your array and updating the tableview)
             let alert = UIAlertController(title: "Delete Meme", message: "Are you sure you want to delete this Meme?", preferredStyle: .alert)
             let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (action) in
-                savedMemes.remove(at: indexPath.row)
+                let realm = try! Realm()
+                try! realm.write {
+                    realm.delete(results[indexPath.row])
+                }
                   self.memeList.reloadData()
             }
             let cancelAction = UIAlertAction(title: "Cancel", style: .default) 

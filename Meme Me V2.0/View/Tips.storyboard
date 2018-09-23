@@ -28,7 +28,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="5nl-6j-bXa">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="5nl-6j-bXa" customClass="TipCollectionViewCell" customModule="Meme_Me_V2_0" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="359" height="404"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -51,6 +51,10 @@
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" red="0.22352941179999999" green="0.26274509800000001" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <outlet property="tipImageView" destination="gLa-L7-W8m" id="OWM-bL-Mu6"/>
+                                            <outlet property="tipTextView" destination="fGr-VA-VVA" id="6rE-a7-DwJ"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <userDefinedRuntimeAttributes>

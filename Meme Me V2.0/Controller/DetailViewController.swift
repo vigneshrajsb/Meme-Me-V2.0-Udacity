@@ -69,12 +69,10 @@ class DetailViewController: UIViewController {
         guard let imageAToShare = memeDetailIimageView.image else { return }
         let activityVC = UIActivityViewController(activityItems: [imageAToShare], applicationActivities: nil)
         present(activityVC, animated: true)
-        
-        print("share tapped")
+
     }
   
     @objc func editTapped() {
-        print("edit tapped")
         guard let selectedMeme = selectedMeme else { return }
         performSegue(withIdentifier: segueDetailToEditor, sender: selectedMeme)
     }

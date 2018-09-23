@@ -73,6 +73,25 @@ func getColorFromString(string: String)-> UIColor {
     return color
 }
 
+func getMonthString(date: Date) -> String {
+    let calendar = Calendar.current
+    let monthIndex = calendar.component(.month, from: date) - 1
+    let monthArray = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    if monthIndex > 11 {
+        return "Err"
+    }
+    return monthArray[monthIndex]
+}
+
+func getYearFrom(date: Date) -> String {
+    let calendar = Calendar.current
+    return String(calendar.component(.year, from: date))
+}
+
+func getDayFrom(date: Date) -> String {
+    let calendar = Calendar.current
+    return String(calendar.component(.day, from: date))
+}
 
 func getFontFromString(string: String) -> UIFont {
     var fontName = ""

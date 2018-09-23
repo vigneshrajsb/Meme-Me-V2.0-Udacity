@@ -9,6 +9,7 @@
 import UIKit
 
 class TipsViewController: UIViewController {
+     var tipsArray = [Tips]()
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var tipsCollection: UICollectionView!
@@ -26,8 +27,16 @@ class TipsViewController: UIViewController {
         tipsCollection.delegate = self
         tipsCollection.dataSource = self
         tipsCollection.isPagingEnabled = true
+       createArray()
     }
     
+    func createArray() {
+       
+        tipsArray.append(Tips(image: UIImage(named: "tip1") ?? UIImage(), text: "From the Home Tab, Use Album or Camera to get the picture to be Memed"))
+        tipsArray.append(Tips(image: UIImage(named: "tip2") ?? UIImage(), text: "From Left to Right \nShare the Meme to social media or save to your phone \n Open text setting \n cancel the current action"))
+        tipsArray.append(Tips(image: UIImage(named: "tip3") ?? UIImage(), text: "use the setting pop up to change font, color and border color of the text in the Meme"))
+        tipsArray.append(Tips(image: UIImage(named: "tip4") ?? UIImage(), text: "delete the meme by swiping the entry from right to left and choose Delete"))
+    }
     
     
     @IBAction func previousTapped(_ sender: Any) {
@@ -76,10 +85,13 @@ extension TipsViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-     
-        cell.backgroundColor = customBlue
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? TipCollectionViewCell {
+        
+        cell.tipImageView.image = tipsArray[indexPath.row].image
+        cell.tipTextView.text = tipsArray[indexPath.row].text
         return cell
+        }
+        return UICollectionViewCell()
     }
     
 

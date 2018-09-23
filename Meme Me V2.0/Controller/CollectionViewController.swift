@@ -33,7 +33,6 @@ class CollectionViewController: UIViewController {
     func setupLayout() {
         memeCollectionView.collectionViewLayout.invalidateLayout()
         assignHeightValue(for: constraintForTopView)
-        print(constraintForTopView.constant)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -120,7 +119,7 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as? MemeCollectionViewCell {
-        //cell.memeImageView.image = savedMemes[indexPath.row].memedImage
+        
             cell.memeImageView.image = UIImage(data: results[indexPath.row].memedImage)
         return cell
         }
@@ -129,7 +128,7 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-      //  performSegue(withIdentifier: segueCollectiontoDetail, sender: savedMemes[indexPath.row])
+      
          performSegue(withIdentifier: segueCollectiontoDetail, sender: results[indexPath.row])
     }
     
