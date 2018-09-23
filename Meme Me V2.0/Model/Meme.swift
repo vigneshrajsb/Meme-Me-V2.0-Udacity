@@ -7,4 +7,17 @@
 //
 
 import Foundation
+import RealmSwift
 import Realm
+
+class MemeMe: Object {
+    @objc dynamic var image: Data = Data()
+    @objc dynamic var topText: String = ""
+    @objc dynamic var bottomText: String = ""
+    @objc dynamic var dateSaved: Date = Date()
+    @objc dynamic var memedImage: Data = Data()
+    @objc dynamic var font: String = ""
+    @objc dynamic var color: String = ""
+    @objc dynamic var border: String = ""
+
+}

@@ -86,7 +86,7 @@ class CollectionViewController: UIViewController {
             prepareSegueToMemeEditor(for: segue, sender: sender)
         } else if segue.identifier == segueCollectiontoDetail {
             if let detailVC = segue.destination as? DetailViewController {
-                detailVC.selectedMeme = sender as? Meme
+                detailVC.selectedMeme = sender as? MemeMe
             }
         }
     }
@@ -114,12 +114,14 @@ extension CollectionViewController: UIImagePickerControllerDelegate, UINavigatio
 
 extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return savedMemes.count
+        //return savedMemes.count
+        return results.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as? MemeCollectionViewCell {
-        cell.memeImageView.image = savedMemes[indexPath.row].memedImage
+        //cell.memeImageView.image = savedMemes[indexPath.row].memedImage
+            cell.memeImageView.image = UIImage(data: results[indexPath.row].memedImage)
         return cell
         }
         return UICollectionViewCell()
@@ -127,7 +129,8 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        performSegue(withIdentifier: segueCollectiontoDetail, sender: savedMemes[indexPath.row])
+      //  performSegue(withIdentifier: segueCollectiontoDetail, sender: savedMemes[indexPath.row])
+         performSegue(withIdentifier: segueCollectiontoDetail, sender: results[indexPath.row])
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

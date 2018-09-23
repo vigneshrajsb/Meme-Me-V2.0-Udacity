@@ -28,6 +28,5 @@ struct Meme {
         self.font = font
         self.color = color
         self.border = border
-        
     }
 }

@@ -9,8 +9,8 @@
 import UIKit
 
 class DetailViewController: UIViewController {
-     var selectedMeme: Meme?
-    
+     //var selectedMeme: Meme?
+    var selectedMeme: MemeMe?
     @IBOutlet weak var constraintImageViewWidth: NSLayoutConstraint!
     @IBOutlet weak var constraintImageViewHeight: NSLayoutConstraint!
     
@@ -61,7 +61,7 @@ class DetailViewController: UIViewController {
         self.navigationItem.rightBarButtonItems = [editButton, shareButton]
         
         if let selectedMeme = selectedMeme {
-            memeDetailIimageView.image = selectedMeme.memedImage
+            memeDetailIimageView.image = UIImage(data: selectedMeme.memedImage)
         }
     }
 
@@ -82,7 +82,7 @@ class DetailViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == segueDetailToEditor {
             if let editorVC = segue.destination as? MemeViewController {
-                editorVC.memeToEdit = sender as? Meme
+                editorVC.memeToEdit = sender as? MemeMe
             }
         }
     }

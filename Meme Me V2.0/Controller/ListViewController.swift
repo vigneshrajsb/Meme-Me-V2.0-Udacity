@@ -7,8 +7,15 @@
 //
 
 import UIKit
+import RealmSwift
+import Realm
 
 var savedMemes: [Meme] = []
+var results: Results<MemeMe> = {
+    let realm = try! Realm()
+    let results = realm.objects(MemeMe.self)
+    return results
+}()
 
 class ListViewController: UIViewController {
     
@@ -21,13 +28,12 @@ class ListViewController: UIViewController {
     @IBOutlet weak var memeList: UITableView!
     
     let imagePicker = UIImagePickerController()
-   
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeUI()
-        createTestDate()
         print(UIDevice.current.orientation.isLandscape)
+        print(results.count)
    
     }
     
@@ -44,34 +50,34 @@ class ListViewController: UIViewController {
         assignHeightValue(for: constraintTopViewHeight)
     }
     
-    func createTestDate() {
-        let meme1 = UIImage(named: "meme1")
-        let meme2 = UIImage(named: "meme2")
-        let meme3 = UIImage(named: "meme3")
-        let meme4 = UIImage(named: "meme4")
-        
-        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!, font: "IMPACT", color: "RED", border: "BLUE"))
-           savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom", dateSaved: Date(), memedImage: meme2!, font: "FUTURA", color: "BLUE", border: "YELLOW"))
-        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!, font: "IMPACT", color: "RED", border: "BLUE"))
-        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom", dateSaved: Date(), memedImage: meme2!, font: "FUTURA", color: "BLUE", border: "YELLOW"))
-        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!, font: "IMPACT", color: "RED", border: "BLUE"))
-        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom", dateSaved: Date(), memedImage: meme2!, font: "FUTURA", color: "BLUE", border: "YELLOW"))
-        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!, font: "IMPACT", color: "RED", border: "BLUE"))
-        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom", dateSaved: Date(), memedImage: meme2!, font: "FUTURA", color: "BLUE", border: "YELLOW"))
-        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!, font: "IMPACT", color: "RED", border: "BLUE"))
-        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom", dateSaved: Date(), memedImage: meme2!, font: "FUTURA", color: "BLUE", border: "YELLOW"))
-        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!, font: "IMPACT", color: "RED", border: "BLUE"))
-        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom", dateSaved: Date(), memedImage: meme2!, font: "FUTURA", color: "BLUE", border: "YELLOW"))
-        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!, font: "IMPACT", color: "RED", border: "BLUE"))
-        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom", dateSaved: Date(), memedImage: meme2!, font: "FUTURA", color: "BLUE", border: "YELLOW"))
-        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!, font: "IMPACT", color: "RED", border: "BLUE"))
-        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom", dateSaved: Date(), memedImage: meme2!, font: "FUTURA", color: "BLUE", border: "YELLOW"))
-        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!, font: "IMPACT", color: "RED", border: "BLUE"))
-        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom", dateSaved: Date(), memedImage: meme2!, font: "FUTURA", color: "BLUE", border: "YELLOW"))
-        
-       
-    }
-    
+//    func createTestDate() {
+//        let meme1 = UIImage(named: "meme1")
+//        let meme2 = UIImage(named: "meme2")
+//        let meme3 = UIImage(named: "meme3")
+//        let meme4 = UIImage(named: "meme4")
+//        
+//        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!, font: "IMPACT", color: "RED", border: "BLUE"))
+//           savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom", dateSaved: Date(), memedImage: meme2!, font: "FUTURA", color: "BLUE", border: "YELLOW"))
+//        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!, font: "IMPACT", color: "RED", border: "BLUE"))
+//        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom", dateSaved: Date(), memedImage: meme2!, font: "FUTURA", color: "BLUE", border: "YELLOW"))
+//        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!, font: "IMPACT", color: "RED", border: "BLUE"))
+//        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom", dateSaved: Date(), memedImage: meme2!, font: "FUTURA", color: "BLUE", border: "YELLOW"))
+//        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!, font: "IMPACT", color: "RED", border: "BLUE"))
+//        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom", dateSaved: Date(), memedImage: meme2!, font: "FUTURA", color: "BLUE", border: "YELLOW"))
+//        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!, font: "IMPACT", color: "RED", border: "BLUE"))
+//        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom", dateSaved: Date(), memedImage: meme2!, font: "FUTURA", color: "BLUE", border: "YELLOW"))
+//        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!, font: "IMPACT", color: "RED", border: "BLUE"))
+//        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom", dateSaved: Date(), memedImage: meme2!, font: "FUTURA", color: "BLUE", border: "YELLOW"))
+//        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!, font: "IMPACT", color: "RED", border: "BLUE"))
+//        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom", dateSaved: Date(), memedImage: meme2!, font: "FUTURA", color: "BLUE", border: "YELLOW"))
+//        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!, font: "IMPACT", color: "RED", border: "BLUE"))
+//        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom", dateSaved: Date(), memedImage: meme2!, font: "FUTURA", color: "BLUE", border: "YELLOW"))
+//        savedMemes.append(Meme(image: meme1!, topText: "Meme 1 top", bottomText: "Meme 1 bottom", dateSaved: Date(), memedImage: meme1!, font: "IMPACT", color: "RED", border: "BLUE"))
+//        savedMemes.append(Meme(image: meme2!, topText: "Meme 2 Image is a big image that cannot be updated", bottomText: "Meme 2 bottom", dateSaved: Date(), memedImage: meme2!, font: "FUTURA", color: "BLUE", border: "YELLOW"))
+//        
+//       
+//    }
+//    
     func initializeUI() {
         topView.backgroundColor = customBlue
         
@@ -120,7 +126,7 @@ class ListViewController: UIViewController {
       prepareSegueToMemeEditor(for: segue, sender: sender)
         } else if segue.identifier == segueToDetailFromTable {
             if let detailVC = segue.destination as? DetailViewController {
-                detailVC.selectedMeme = sender as? Meme
+                detailVC.selectedMeme = sender as? MemeMe
             }
             
             
@@ -149,14 +155,21 @@ extension ListViewController: UIImagePickerControllerDelegate, UINavigationContr
 
 extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return savedMemes.count
+       // return savedMemes.count
+        return results.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if let cell = memeList.dequeueReusableCell(withIdentifier: "tableCell") as? MemeTableViewCell {
-             let meme = savedMemes[indexPath.row]
-            cell.memeImageView.image = meme.memedImage
+//             let meme = savedMemes[indexPath.row]
+//            cell.memeImageView.image = meme.memedImage
+//            cell.memeTextLabel.text = "\(meme.topText) - \(meme.bottomText)"
+//            cell.dateLabel.text = "18"
+//            cell.monthLabel.text = "Sep"
+//            cell.yearLabel.text = "2018"
+            let meme = results[indexPath.row]
+            cell.memeImageView.image = UIImage(data: meme.memedImage)
             cell.memeTextLabel.text = "\(meme.topText) - \(meme.bottomText)"
             cell.dateLabel.text = "18"
             cell.monthLabel.text = "Sep"
@@ -167,7 +180,7 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: segueToDetailFromTable, sender: savedMemes[indexPath.row])
+        performSegue(withIdentifier: segueToDetailFromTable, sender: results[indexPath.row])
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

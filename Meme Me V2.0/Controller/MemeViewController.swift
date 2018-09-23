@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Realm
+import  RealmSwift
 
 class MemeViewController: UIViewController {
     
@@ -35,7 +37,8 @@ class MemeViewController: UIViewController {
     var shareButton: UIBarButtonItem!
     
     var selectedImage: UIImage?
-    var memeToEdit: Meme?
+   // var memeToEdit: Meme?
+     var memeToEdit: MemeMe?
     let picker = UIPickerView()
     
     var attributes: [NSAttributedString.Key: Any] = [NSAttributedString.Key.font: UIFont(name: "Impact", size: 30.0),
@@ -68,24 +71,20 @@ class MemeViewController: UIViewController {
         setLayout()
       
         self.tabBarController?.tabBar.isHidden = true
+        memeImageView.contentMode = .scaleAspectFit
         topTextView.delegate = self
         bottomTextView.delegate = self
         if let memeToEdit = memeToEdit {
-            memeImageView.image = memeToEdit.image
+            memeImageView.image = UIImage(data: memeToEdit.image)
             topTextView.text = memeToEdit.topText
             bottomTextView.text = memeToEdit.bottomText
             selectedFont = memeToEdit.font
             selectedColor = memeToEdit.color
             selectedStrokeColor = memeToEdit.border
-            print("meme object")
         } else if (selectedImage != nil){
             memeImageView.image = selectedImage
             topTextView.attributedText = NSMutableAttributedString(string: defaultValueForTextView, attributes: attributes)
             bottomTextView.attributedText = NSMutableAttributedString(string: defaultValueForTextView, attributes: attributes)
-            print("meme image from image picker")
-            if let image = selectedImage {
-                print("IMage available")
-            }
         } else {
             let alert = UIAlertController(title: "Error", message: "wrong", preferredStyle: .alert)
             let action = UIAlertAction(title: "Go back", style: .default) { (action) in
@@ -99,10 +98,10 @@ class MemeViewController: UIViewController {
         fontTextField.delegate = self
         colorTextField.delegate = self
         strokeColorTextField.delegate = self
-        
-        if let selectedImage = selectedImage {
-            memeImageView.image = selectedImage
-        }
+//        
+//        if let selectedImage = selectedImage {
+//            memeImageView.image = selectedImage
+//        }
        
    
             setupTextFieldsForPopUp()
@@ -240,7 +239,28 @@ class MemeViewController: UIViewController {
         let meme = Meme(image: image, topText: topTextView.text, bottomText: bottomTextView.text, dateSaved: Date(), memedImage: generateMemeImage(),font: selectedFont, color: selectedColor, border: selectedStrokeColor)
         
         savedMemes.append(meme)
+        saveInRealm()
         print(savedMemes.count)
+    }
+    
+    func saveInRealm() {
+        guard let image = memeImageView.image?.jpegData(compressionQuality: 1) else { return }
+        guard let memedImage = generateMemeImage().jpegData(compressionQuality: 1) else { return }
+    let meme = MemeMe()
+        meme.topText = topTextView.text
+        meme.bottomText = bottomTextView.text
+        meme.dateSaved = Date()
+        meme.font = selectedFont
+        meme.color = selectedColor
+        meme.border = selectedStrokeColor
+        meme.image = image
+        meme.memedImage = memedImage
+        
+        let realm = try! Realm()
+        try! realm.write {
+            realm.add(meme)
+        }
+    
     }
     
     

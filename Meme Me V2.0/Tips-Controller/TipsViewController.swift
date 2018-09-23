@@ -64,6 +64,8 @@ class TipsViewController: UIViewController {
         let homeVC = storyboard.instantiateViewController(withIdentifier: "home")
         appDelegate?.window?.rootViewController = homeVC
         
+         //UserDefaults.standard.set(true, forKey: "HasLaunchedOnce")
+        
     }
     
 }
