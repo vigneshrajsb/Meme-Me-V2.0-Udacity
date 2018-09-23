@@ -34,8 +34,8 @@ class TipsViewController: UIViewController {
        
         tipsArray.append(Tips(image: UIImage(named: "tip1") ?? UIImage(), text: "From the Home Tab, Use Album or Camera to get the picture to be Memed"))
         tipsArray.append(Tips(image: UIImage(named: "tip2") ?? UIImage(), text: "From Left to Right \nShare the Meme to social media or save to your phone \n Open text setting \n cancel the current action"))
-        tipsArray.append(Tips(image: UIImage(named: "tip3") ?? UIImage(), text: "use the setting pop up to change font, color and border color of the text in the Meme"))
-        tipsArray.append(Tips(image: UIImage(named: "tip4") ?? UIImage(), text: "delete the meme by swiping the entry from right to left and choose Delete"))
+        tipsArray.append(Tips(image: UIImage(named: "tip3") ?? UIImage(), text: "Use the setting pop up to change font, color and border color of the text in the Meme"))
+        tipsArray.append(Tips(image: UIImage(named: "tip4") ?? UIImage(), text: "Delete the meme by swiping the entry from right to left and choose Delete"))
     }
     
     
