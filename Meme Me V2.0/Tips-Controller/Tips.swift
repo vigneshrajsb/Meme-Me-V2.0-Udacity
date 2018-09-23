@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+
+
 struct Tips {
     var image: UIImage?
     var text: String

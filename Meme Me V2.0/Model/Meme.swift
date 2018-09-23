@@ -10,6 +10,7 @@ import Foundation
 import RealmSwift
 import Realm
 
+//Realm Object
 class MemeMe: Object {
     @objc dynamic var image: Data = Data()
     @objc dynamic var topText: String = ""

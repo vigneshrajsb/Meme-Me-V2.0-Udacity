@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+
 class TipsViewController: UIViewController {
      var tipsArray = [Tips]()
     

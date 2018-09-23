@@ -151,6 +151,8 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
         return true
     }
     
+    
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == UITableViewCell.EditingStyle.delete) {
             // handle delete (by removing the data from your array and updating the tableview)

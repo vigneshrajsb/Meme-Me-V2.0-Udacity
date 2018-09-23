@@ -4,7 +4,7 @@
 //
 //  Created by Vigneshraj Sekar Babu on 9/13/18.
 //  Copyright © 2018 Vigneshraj Sekar Babu. All rights reserved.
-//
+// Used for all common methods
 
 import Foundation
 import UIKit

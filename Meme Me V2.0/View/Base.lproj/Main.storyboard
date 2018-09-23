@@ -517,7 +517,7 @@
             </objects>
             <point key="canvasLocation" x="855" y="437"/>
         </scene>
-        <!--MEME ME-->
+        <!--Collection View Controller-->
         <scene sceneID="bSB-Se-aj3">
             <objects>
                 <viewController id="cZG-SQ-K2P" customClass="CollectionViewController" customModule="Meme_Me_V2_0" customModuleProvider="target" sceneMemberID="viewController">
@@ -610,7 +610,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="egJ-k1-YUg"/>
                     </view>
-                    <navigationItem key="navigationItem" title="MEME ME" id="3bj-kL-yq2">
+                    <navigationItem key="navigationItem" id="3bj-kL-yq2">
                         <barButtonItem key="backBarButtonItem" title="Back" id="uYG-dd-UyQ"/>
                     </navigationItem>
                     <connections>
@@ -635,7 +635,7 @@
         <image name="table" width="22.5" height="22.5"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="5eR-ao-ab6"/>
-        <segue reference="sOf-SA-tBr"/>
+        <segue reference="RAL-mA-bbm"/>
+        <segue reference="ixM-GM-SKL"/>
     </inferredMetricsTieBreakers>
 </document>

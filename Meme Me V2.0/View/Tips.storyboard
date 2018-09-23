@@ -35,7 +35,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="359" height="404"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="album" translatesAutoresizingMaskIntoConstraints="NO" id="gLa-L7-W8m">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="tip1" translatesAutoresizingMaskIntoConstraints="NO" id="gLa-L7-W8m">
                                                     <rect key="frame" x="0.0" y="0.0" width="359" height="214"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
@@ -148,6 +148,6 @@
     </scenes>
     <resources>
         <image name="LaunchScreen Title" width="294" height="119"/>
-        <image name="album" width="75" height="75"/>
+        <image name="tip1" width="1242" height="308"/>
     </resources>
 </document>

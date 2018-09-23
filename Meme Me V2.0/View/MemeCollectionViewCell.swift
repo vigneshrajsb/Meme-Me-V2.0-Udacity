@@ -12,5 +12,6 @@ class MemeCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var memeImageView: UIImageView!
     
+    //cell to display the meme Image
     
 }

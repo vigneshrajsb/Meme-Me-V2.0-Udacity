@@ -70,6 +70,8 @@ class DetailViewController: UIViewController {
         let activityVC = UIActivityViewController(activityItems: [imageAToShare], applicationActivities: nil)
         present(activityVC, animated: true)
 
+        
+        
     }
   
     @objc func editTapped() {

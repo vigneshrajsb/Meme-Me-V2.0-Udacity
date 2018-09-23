@@ -10,6 +10,8 @@ import UIKit
 
 
 
+
+
 class TipCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var tipImageView: UIImageView!

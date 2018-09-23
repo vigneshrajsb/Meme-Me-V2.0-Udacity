@@ -127,6 +127,8 @@ class MemeViewController: UIViewController {
     
     
     
+    
+    
     @objc func keyBoardWillShow(notification: NSNotification) {
       print("Keyboard will show")
         

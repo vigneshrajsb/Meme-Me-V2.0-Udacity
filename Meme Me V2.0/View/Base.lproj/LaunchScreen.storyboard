@@ -18,15 +18,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchScreen Title" translatesAutoresizingMaskIntoConstraints="NO" id="s7u-PQ-dA1">
-                                <rect key="frame" x="40.666666666666657" y="346.66666666666669" width="294" height="119"/>
-                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Signature" translatesAutoresizingMaskIntoConstraints="NO" id="OFm-pI-101">
                                 <rect key="frame" x="162.66666666666666" y="732" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="hbE-GH-lIq"/>
                                     <constraint firstAttribute="width" constant="50" id="jCA-XK-WdO"/>
                                 </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="LaunchScreen Title" translatesAutoresizingMaskIntoConstraints="NO" id="s7u-PQ-dA1">
+                                <rect key="frame" x="40" y="253" width="294" height="119"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.22352941179999999" green="0.26274509800000001" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
