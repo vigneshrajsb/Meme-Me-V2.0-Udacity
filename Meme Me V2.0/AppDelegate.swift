@@ -22,12 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
            
         } else {
             print("first time launch")
-//            self.window = UIWindow(frame: UIScreen.main.bounds)
-//            let tipsStoryboard = UIStoryboard(name: "Tips", bundle: nil)
-//            let viewController = tipsStoryboard.instantiateViewController(withIdentifier: "Tips")
-//            self.window?.rootViewController = viewController
-//            self.window?.makeKeyAndVisible()
-//            UserDefaults.standard.set(true, forKey: "HasLaunchedOnce")
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+            let tipsStoryboard = UIStoryboard(name: "Tips", bundle: nil)
+            let viewController = tipsStoryboard.instantiateViewController(withIdentifier: "Tips")
+            self.window?.rootViewController = viewController
+            self.window?.makeKeyAndVisible()
+            //UserDefaults.standard.set(true, forKey: "HasLaunchedOnce")
             
         }
         

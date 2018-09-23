@@ -9,14 +9,17 @@
 import UIKit
 
 class DetailViewController: UIViewController {
+     var selectedMeme: Meme?
     
+    @IBOutlet weak var constraintImageViewWidth: NSLayoutConstraint!
+    @IBOutlet weak var constraintImageViewHeight: NSLayoutConstraint!
     
     @IBOutlet weak var memeDetailIimageView: UIImageView!
-    var selectedMeme: Meme?
+   
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        memeDetailIimageView.translatesAutoresizingMaskIntoConstraints = false
         initializeUI()
     }
     
@@ -28,9 +31,31 @@ class DetailViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
     }
     
+    func setupLayout() {
+        if UIDevice.current.orientation.isLandscape {
+            print("landscape")
+            print( self.view.safeAreaLayoutGuide.layoutFrame.height)
+            constraintImageViewWidth.constant = view.safeAreaLayoutGuide.layoutFrame.height
+            constraintImageViewHeight.constant = view.safeAreaLayoutGuide.layoutFrame.height
+        } else {
+            print("portrait")
+             print( self.view.safeAreaLayoutGuide.layoutFrame.width)
+            constraintImageViewWidth.constant = view.safeAreaLayoutGuide.layoutFrame.width
+            constraintImageViewHeight.constant = view.safeAreaLayoutGuide.layoutFrame.width
+        }
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+       
+    }
+    
+    override func viewWillLayoutSubviews() {
+         setupLayout()
+    }
+    
     func initializeUI() {
         self.tabBarController?.tabBar.isHidden = true
-        
+                setupLayout()
         let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareTapped))
         let editButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTapped))
         self.navigationItem.rightBarButtonItems = [editButton, shareButton]

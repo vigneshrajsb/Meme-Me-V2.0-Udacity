@@ -11,29 +11,89 @@ import UIKit
 class TipsViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var tipsCollection: UICollectionView!
+    
+    @IBOutlet weak var previousButton: UIButton!
+    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var pageControl: UIPageControl!
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tipsCollection.delegate = self
+        tipsCollection.dataSource = self
+        tipsCollection.isPagingEnabled = true
+    }
+    
+    
+    
+    @IBAction func previousTapped(_ sender: Any) {
+        guard var index = tipsCollection.indexPathsForVisibleItems.first else { return }
+        print(tipsCollection.indexPathsForVisibleItems.first)
+          print(index.row)
+        if index.row > 0 {
+            print(index.row)
+            index.row -= 1
+            scrollTo(index: index)
+        }
+    }
+    
+    @IBAction func nextTapped(_ sender: Any) {
+        guard var index = tipsCollection.indexPathsForVisibleItems.first else { return }
+        if index.row < 3 {
+        index.row += 1
+        scrollTo(index: index)
+        }
+    }
+    
+    func scrollTo(index: IndexPath) {
+        tipsCollection.scrollToItem(at: index, at: [.centeredVertically, .centeredHorizontally] , animated: true)
+        pageControl.currentPage = index.row
+    }
+    
+    
+    @IBAction func getStartedTapped(_ sender: Any) {
+      
         
-        //      if let font = UIFont(name: "PhosphateSolid", size: 30.0) {
-        //          navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: UIColor.white]
+        //window = UIWindow(frame: UIScreen.main.bounds)
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let homeVC = storyboard.instantiateViewController(withIdentifier: "home")
+        appDelegate?.window?.rootViewController = homeVC
         
-        //        print("font found")
-        //    }
-        let attributedString = NSAttributedString(string: "MEME ME", attributes: [NSAttributedString.Key.font: UIFont(name: "PhosphateSolid", size: 30.0)]   )
-        titleLabel.attributedText = NSAttributedString(attributedString: attributedString)
-        // Do any additional setup after loading the view.
+    }
+    
+}
+
+extension TipsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+     
+        cell.backgroundColor = customBlue
+        return cell
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: tipsCollection.frame.width, height: tipsCollection.frame.height)
     }
-    */
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        guard var index = tipsCollection.indexPathsForVisibleItems.first else { return }
+        pageControl.currentPage = index.row
+    }
 
+    
 }

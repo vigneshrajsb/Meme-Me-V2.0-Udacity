@@ -338,11 +338,11 @@ extension MemeViewController: UITextViewDelegate {
     func getSizeFor(length: Int) -> CGFloat {
         var size: CGFloat = 0
         switch length {
-        case 0...25:
+        case 0...35:
             size = 30
-        case 26...50:
+        case 36...55:
             size = 26
-        case 41...70:
+        case 56...70:
             size = 22
         default:
             size = 22

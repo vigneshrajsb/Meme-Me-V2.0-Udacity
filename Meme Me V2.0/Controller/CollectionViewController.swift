@@ -28,7 +28,6 @@ class CollectionViewController: UIViewController {
         super.viewWillTransition(to: size, with: coordinator)
         guard  tabBarController?.selectedIndex == 1 else { return }
         setupLayout()
-        
     }
     
     func setupLayout() {
@@ -46,6 +45,11 @@ class CollectionViewController: UIViewController {
         topView.backgroundColor = customBlue
         if let navigationController = navigationController {
             removeNavBarBorder(for: navigationController)
+            if let titleImage = UIImage(named: "title"){
+                let imgView = UIImageView(image: titleImage)
+                imgView.contentMode = .scaleAspectFit
+                self.navigationItem.titleView = imgView
+            }
         }
         topView.createShadow()
         setupImagePicker()

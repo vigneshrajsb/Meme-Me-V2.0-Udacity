@@ -10,9 +10,22 @@ import UIKit
 
 class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
 
+    override var shouldAutorotate: Bool {
+        return true
+    }
+    
+
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.all
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self
+        if UIDevice.current.orientation.isLandscape {
+            UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
+        }
     }
     
     

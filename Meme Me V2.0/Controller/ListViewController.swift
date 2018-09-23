@@ -21,12 +21,14 @@ class ListViewController: UIViewController {
     @IBOutlet weak var memeList: UITableView!
     
     let imagePicker = UIImagePickerController()
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeUI()
         createTestDate()
-        
+        print(UIDevice.current.orientation.isLandscape)
+   
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,25 +74,17 @@ class ListViewController: UIViewController {
     
     func initializeUI() {
         topView.backgroundColor = customBlue
-        if  let navigationController = navigationController  {
-            print("in nav block")
-            removeNavBarBorder(for: navigationController)
-            if let font = UIFont(name: "PhosphateSolid", size: 30.0) {
-                navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: UIColor.white]
-                
-                print("font found")
-//                let viewTest = UIView(frame: CGRect(x: 0, y: 0, width: 150, height: 35))
-//                viewTest.addSubview(label)
-                let label = UILabel(frame: CGRect(x: 0, y: 0, width: navigationController.navigationBar.frame.width, height: navigationController.navigationBar.frame.height))
-                label.textAlignment = .center
-                
-                label.attributedText = NSAttributedString(string: "MEME ME", attributes: [NSAttributedString.Key.font: UIFont(name: "PhosphateSolid", size: 20.0) ])
-                label.textColor = customYellow
-              //  navigationController.navigationItem.title = ""
-                navigationController.navigationBar.addSubview(label)
-            }
-        }
         
+        if  let navigationController = navigationController  {
+            removeNavBarBorder(for: navigationController)
+           
+        }
+        if let titleImage = UIImage(named: "title"){
+            let imgView = UIImageView(image: titleImage)
+            imgView.contentMode = .scaleAspectFit
+           self.navigationItem.titleView = imgView
+        }
+       
         topView.createShadow()
         setupImagePicker()
     }
@@ -178,7 +172,7 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return constraintTopViewHeight.constant - 20
+        return constraintTopViewHeight.constant 
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

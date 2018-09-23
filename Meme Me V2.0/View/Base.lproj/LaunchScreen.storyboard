@@ -18,16 +18,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchScreen" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ccg-tj-6Vm">
-                                <rect key="frame" x="-3" y="-3" width="381" height="818"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchScreen Title" translatesAutoresizingMaskIntoConstraints="NO" id="s7u-PQ-dA1">
+                                <rect key="frame" x="40.666666666666657" y="346.66666666666669" width="294" height="119"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Signature" translatesAutoresizingMaskIntoConstraints="NO" id="OFm-pI-101">
+                                <rect key="frame" x="162.66666666666666" y="732" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="hbE-GH-lIq"/>
+                                    <constraint firstAttribute="width" constant="50" id="jCA-XK-WdO"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.22352941179999999" green="0.26274509800000001" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="ccg-tj-6Vm" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="-3" id="5jF-m1-iPc"/>
-                            <constraint firstAttribute="trailing" secondItem="ccg-tj-6Vm" secondAttribute="trailing" constant="-3" id="GV9-Hn-aLy"/>
-                            <constraint firstItem="ccg-tj-6Vm" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" constant="-3" id="x4g-ct-Ad8"/>
-                            <constraint firstAttribute="bottom" secondItem="ccg-tj-6Vm" secondAttribute="bottom" constant="-3" id="zlI-si-06N"/>
+                            <constraint firstItem="s7u-PQ-dA1" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="G0w-fX-ldS"/>
+                            <constraint firstItem="OFm-pI-101" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="IDT-mu-6MW"/>
+                            <constraint firstItem="s7u-PQ-dA1" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="ezh-8A-kmm"/>
+                            <constraint firstAttribute="bottom" secondItem="OFm-pI-101" secondAttribute="bottom" constant="30" id="qVK-Ld-wMr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -38,6 +45,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LaunchScreen" width="375" height="667"/>
+        <image name="LaunchScreen Title" width="294" height="119"/>
+        <image name="Signature" width="58" height="49"/>
     </resources>
 </document>

@@ -12,7 +12,11 @@ import UIKit
 let customBlue = UIColor(red: 57/255, green: 67/255, blue: 124/255, alpha: 1.0)
 let customYellow = UIColor(red: 255/255, green: 244/255, blue: 136/255, alpha: 1.0)
 
-let maxCharactersAllowedForMemeText = 70
+let maxCharactersAllowedForMemeText = 80
+
+let heightForTopViewInPortrait: CGFloat = 100
+let heightForTopViewInLandscape: CGFloat = 80
+
 
 let segueFromTableView = "tableToEditor"
 let segueFromCollectionView = "collectionToEditor"
@@ -30,11 +34,11 @@ func removeNavBarBorder(for navigationController: UINavigationController) {
 
 func assignHeightValue(for constraint: NSLayoutConstraint) {
     if UIDevice.current.orientation.isLandscape {
-        constraint.constant = 100
+        constraint.constant = heightForTopViewInLandscape
     } else if UIDevice.current.orientation.isFlat {
-        constraint.constant =  UIApplication.shared.statusBarOrientation.isLandscape ? 100 : 120
+        constraint.constant =  UIApplication.shared.statusBarOrientation.isLandscape ? heightForTopViewInLandscape : heightForTopViewInPortrait
     } else {
-        constraint.constant = 120
+        constraint.constant = heightForTopViewInPortrait
     }
 }
 

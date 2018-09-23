@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		251F110E3B3884142A99DA95 /* Pods_Meme_Me_V2_0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D5A704716E34D0A0D450C9 /* Pods_Meme_Me_V2_0.framework */; };
+		5008A2ED215759110053FB7E /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5008A2EC215759100053FB7E /* Meme.swift */; };
+		503987A3215728B000B495DA /* Tips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503987A2215728B000B495DA /* Tips.swift */; };
 		504EC5CF2154D17E00562F5A /* PhosphateSolid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 504EC5CE2154D17E00562F5A /* PhosphateSolid.ttf */; };
 		506A579B2154E10000263137 /* TipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506A579A2154E10000263137 /* TipsViewController.swift */; };
 		506A9F4E21549B58001803F9 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506A9F4D21549B58001803F9 /* UIViewExtension.swift */; };
@@ -19,7 +22,7 @@
 		50759BC2214A3CBD00FCCBC8 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50759BC1214A3CBD00FCCBC8 /* Helper.swift */; };
 		507F59092148E90900D57845 /* Tips.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 507F59082148E90900D57845 /* Tips.storyboard */; };
 		5084E96B214EE4B100B66824 /* Impact.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5084E96A214EE4B100B66824 /* Impact.ttf */; };
-		50A21005214F011500732A44 /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A21004214F011500732A44 /* Meme.swift */; };
+		50A21005214F011500732A44 /* Meme-Struct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A21004214F011500732A44 /* Meme-Struct.swift */; };
 		50ADE0DE214D81DC00FEA7C1 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50ADE0DD214D81DC00FEA7C1 /* CustomTabBarController.swift */; };
 		50B59FC32150D8F800DED84C /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B59FC22150D8F800DED84C /* DetailViewController.swift */; };
 		50C2B33121520C140045CD4B /* MemeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C2B33021520C140045CD4B /* MemeTableViewCell.swift */; };
@@ -28,6 +31,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5008A2EC215759100053FB7E /* Meme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
+		503987A2215728B000B495DA /* Tips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tips.swift; sourceTree = "<group>"; };
 		504EC5CE2154D17E00562F5A /* PhosphateSolid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PhosphateSolid.ttf; sourceTree = "<group>"; };
 		506A579A2154E10000263137 /* TipsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipsViewController.swift; sourceTree = "<group>"; };
 		506A9F4D21549B58001803F9 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
@@ -42,12 +47,15 @@
 		50759BC1214A3CBD00FCCBC8 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		507F59082148E90900D57845 /* Tips.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tips.storyboard; sourceTree = "<group>"; };
 		5084E96A214EE4B100B66824 /* Impact.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Impact.ttf; sourceTree = "<group>"; };
-		50A21004214F011500732A44 /* Meme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
+		50A21004214F011500732A44 /* Meme-Struct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Meme-Struct.swift"; sourceTree = "<group>"; };
 		50ADE0DD214D81DC00FEA7C1 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		50B59FC22150D8F800DED84C /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		50C2B33021520C140045CD4B /* MemeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeTableViewCell.swift; sourceTree = "<group>"; };
 		50C2B332215216230045CD4B /* MemeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeCollectionViewCell.swift; sourceTree = "<group>"; };
 		50D373C8214CB0B10084FA9E /* MemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeViewController.swift; sourceTree = "<group>"; };
+		7CF8FE81AF109D4A689BF518 /* Pods-Meme Me V2.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meme Me V2.0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Meme Me V2.0/Pods-Meme Me V2.0.debug.xcconfig"; sourceTree = "<group>"; };
+		BFFA6C65F351B73C992FE11F /* Pods-Meme Me V2.0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meme Me V2.0.release.xcconfig"; path = "Pods/Target Support Files/Pods-Meme Me V2.0/Pods-Meme Me V2.0.release.xcconfig"; sourceTree = "<group>"; };
+		D9D5A704716E34D0A0D450C9 /* Pods_Meme_Me_V2_0.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Meme_Me_V2_0.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,16 +63,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				251F110E3B3884142A99DA95 /* Pods_Meme_Me_V2_0.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		19CC86822611B7C63EA80F83 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D9D5A704716E34D0A0D450C9 /* Pods_Meme_Me_V2_0.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		506A57992154DE3800263137 /* Tips-Controller */ = {
 			isa = PBXGroup;
 			children = (
 				506A579A2154E10000263137 /* TipsViewController.swift */,
+				503987A2215728B000B495DA /* Tips.swift */,
 			);
 			path = "Tips-Controller";
 			sourceTree = "<group>";
@@ -74,6 +92,8 @@
 			children = (
 				5071413F21477DAC0036E7E3 /* Meme Me V2.0 */,
 				5071413E21477DAC0036E7E3 /* Products */,
+				792BF95F2E8A2413F1C0A3FF /* Pods */,
+				19CC86822611B7C63EA80F83 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -123,7 +143,8 @@
 		5084E96D214EE4CF00B66824 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				50A21004214F011500732A44 /* Meme.swift */,
+				50A21004214F011500732A44 /* Meme-Struct.swift */,
+				5008A2EC215759100053FB7E /* Meme.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -151,6 +172,15 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		792BF95F2E8A2413F1C0A3FF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7CF8FE81AF109D4A689BF518 /* Pods-Meme Me V2.0.debug.xcconfig */,
+				BFFA6C65F351B73C992FE11F /* Pods-Meme Me V2.0.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -158,9 +188,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5071414F21477DAE0036E7E3 /* Build configuration list for PBXNativeTarget "Meme Me V2.0" */;
 			buildPhases = (
+				D742EF00182230B471BE06DA /* [CP] Check Pods Manifest.lock */,
 				5071413921477DAC0036E7E3 /* Sources */,
 				5071413A21477DAC0036E7E3 /* Frameworks */,
 				5071413B21477DAC0036E7E3 /* Resources */,
+				E069C721A9D85540F2B143E4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -221,6 +253,47 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		D742EF00182230B471BE06DA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Meme Me V2.0-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E069C721A9D85540F2B143E4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Meme Me V2.0/Pods-Meme Me V2.0-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Meme Me V2.0/Pods-Meme Me V2.0-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		5071413921477DAC0036E7E3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -232,10 +305,12 @@
 				506A9F4E21549B58001803F9 /* UIViewExtension.swift in Sources */,
 				50759BC0214A3C8900FCCBC8 /* CollectionViewController.swift in Sources */,
 				50D373C9214CB0B10084FA9E /* MemeViewController.swift in Sources */,
-				50A21005214F011500732A44 /* Meme.swift in Sources */,
+				50A21005214F011500732A44 /* Meme-Struct.swift in Sources */,
 				50ADE0DE214D81DC00FEA7C1 /* CustomTabBarController.swift in Sources */,
 				50759BBE214A3C7C00FCCBC8 /* ListViewController.swift in Sources */,
+				5008A2ED215759110053FB7E /* Meme.swift in Sources */,
 				50C2B33121520C140045CD4B /* MemeTableViewCell.swift in Sources */,
+				503987A3215728B000B495DA /* Tips.swift in Sources */,
 				5071414121477DAC0036E7E3 /* AppDelegate.swift in Sources */,
 				50759BC2214A3CBD00FCCBC8 /* Helper.swift in Sources */,
 			);
@@ -379,15 +454,13 @@
 		};
 		5071415021477DAE0036E7E3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7CF8FE81AF109D4A689BF518 /* Pods-Meme Me V2.0.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9RL4386D4Z;
 				INFOPLIST_FILE = "Meme Me V2.0/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.VigneshrajSekarBabu.Meme-Me-V2-0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -397,15 +470,13 @@
 		};
 		5071415121477DAE0036E7E3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BFFA6C65F351B73C992FE11F /* Pods-Meme Me V2.0.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9RL4386D4Z;
 				INFOPLIST_FILE = "Meme Me V2.0/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.VigneshrajSekarBabu.Meme-Me-V2-0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;

@@ -13,7 +13,7 @@
         <!--Custom Tab Bar Controller-->
         <scene sceneID="WJK-st-hOp">
             <objects>
-                <tabBarController id="RIC-h2-irO" customClass="CustomTabBarController" customModule="Meme_Me_V2_0" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="home" id="RIC-h2-irO" customClass="CustomTabBarController" customModule="Meme_Me_V2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="odB-pF-AGW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -45,7 +45,7 @@
                         <color key="tintColor" red="0.99999600649999998" green="1" blue="0.44761344180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" red="0.22352941176470587" green="0.2627450980392157" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="23"/>
+                            <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="20"/>
                             <color key="textColor" red="1" green="0.95686274509803915" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </textAttributes>
                     </navigationBar>
@@ -58,7 +58,7 @@
             </objects>
             <point key="canvasLocation" x="855.20000000000005" y="-337.78110944527737"/>
         </scene>
-        <!--Meme Me-->
+        <!--List View Controller-->
         <scene sceneID="Kq2-oy-ulf">
             <objects>
                 <viewController id="6YC-Z9-oqF" customClass="ListViewController" customModule="Meme_Me_V2_0" customModuleProvider="target" sceneMemberID="viewController">
@@ -67,7 +67,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="stG-kG-gMA">
-                                <rect key="frame" x="0.0" y="118" width="375" height="485"/>
+                                <rect key="frame" x="0.0" y="98" width="375" height="505"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="tableCell" rowHeight="101" id="Inm-NR-YTg" customClass="MemeTableViewCell" customModule="Meme_Me_V2_0" customModuleProvider="target">
@@ -83,32 +83,35 @@
                                                         <constraint firstAttribute="width" secondItem="XHE-Kr-a0u" secondAttribute="height" multiplier="1:1" id="lMj-uf-Zxu"/>
                                                     </constraints>
                                                 </imageView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="-5" translatesAutoresizingMaskIntoConstraints="NO" id="2nP-7U-kwZ">
-                                                    <rect key="frame" x="339.5" y="5" width="28.5" height="90.5"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="-8" translatesAutoresizingMaskIntoConstraints="NO" id="2nP-7U-kwZ">
+                                                    <rect key="frame" x="338" y="5" width="30" height="90.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ary-Rx-Ej8">
-                                                            <rect key="frame" x="0.0" y="0.0" width="28.5" height="33.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="30" height="35.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                            <nil key="textColor"/>
+                                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="31" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pVD-Ah-r7w">
-                                                            <rect key="frame" x="0.0" y="28.5" width="28.5" height="33.5"/>
+                                                            <rect key="frame" x="0.0" y="27.5" width="30" height="35.5"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
-                                                            <nil key="textColor"/>
+                                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2018" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cfn-mF-mTK">
-                                                            <rect key="frame" x="0.0" y="57" width="28.5" height="33.5"/>
+                                                            <rect key="frame" x="0.0" y="55" width="30" height="35.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                                            <nil key="textColor"/>
+                                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="2fa-7c-R7b"/>
+                                                    </constraints>
                                                 </stackView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This label will have the top text of the meme - and the bottom text " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aW8-km-OAq">
-                                                    <rect key="frame" x="110.5" y="23.5" width="222" height="54"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <rect key="frame" x="110.5" y="21.5" width="220.5" height="57.5"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -141,22 +144,22 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aAI-iK-z97" userLabel="topView">
-                                <rect key="frame" x="0.0" y="-2" width="375" height="120"/>
+                                <rect key="frame" x="0.0" y="-2" width="375" height="100"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="center" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="8Oh-v2-XWZ">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jwa-71-haL">
-                                                <rect key="frame" x="0.0" y="0.0" width="187.5" height="120"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="187.5" height="100"/>
                                                 <color key="tintColor" red="1" green="0.9919199487" blue="0.37403681509999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <state key="normal" image="icons8-photo-gallery-60-2"/>
+                                                <state key="normal" image="album"/>
                                                 <connections>
                                                     <action selector="albumTapped:" destination="6YC-Z9-oqF" eventType="touchUpInside" id="wYt-Xo-Ygb"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zxC-57-E9N">
-                                                <rect key="frame" x="187.5" y="0.0" width="187.5" height="120"/>
-                                                <state key="normal" image="icons8-screenshot-60"/>
+                                                <rect key="frame" x="187.5" y="0.0" width="187.5" height="100"/>
+                                                <state key="normal" image="camera"/>
                                                 <connections>
                                                     <action selector="cameraTapped:" destination="6YC-Z9-oqF" eventType="touchUpInside" id="roY-Xg-dFE"/>
                                                 </connections>
@@ -168,7 +171,7 @@
                                 <color key="backgroundColor" red="0.22352941179999999" green="0.26274509800000001" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="8Oh-v2-XWZ" secondAttribute="trailing" id="Kje-lz-hf7"/>
-                                    <constraint firstAttribute="height" constant="120" id="euO-fm-VEr"/>
+                                    <constraint firstAttribute="height" constant="100" id="euO-fm-VEr"/>
                                     <constraint firstItem="8Oh-v2-XWZ" firstAttribute="top" secondItem="aAI-iK-z97" secondAttribute="top" id="hFE-Zf-vD4"/>
                                     <constraint firstItem="8Oh-v2-XWZ" firstAttribute="leading" secondItem="aAI-iK-z97" secondAttribute="leading" id="haT-jY-PWz"/>
                                     <constraint firstAttribute="bottom" secondItem="8Oh-v2-XWZ" secondAttribute="bottom" id="qXd-WI-w5M"/>
@@ -196,7 +199,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="orZ-sd-Jj4"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Meme Me" id="NNc-7e-K75">
+                    <navigationItem key="navigationItem" id="NNc-7e-K75">
                         <barButtonItem key="backBarButtonItem" title="Back" id="Bi4-l4-QPv"/>
                     </navigationItem>
                     <connections>
@@ -463,7 +466,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="t3A-Dk-Nsc">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="t3A-Dk-Nsc">
                                 <rect key="frame" x="0.0" y="114" width="375" height="375"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="375" id="E90-rx-nq9"/>
@@ -479,6 +482,8 @@
                         <viewLayoutGuide key="safeArea" id="DmT-wm-sVv"/>
                     </view>
                     <connections>
+                        <outlet property="constraintImageViewHeight" destination="WdC-1E-M8c" id="RiL-8w-PQ2"/>
+                        <outlet property="constraintImageViewWidth" destination="E90-rx-nq9" id="q9T-58-Dm6"/>
                         <outlet property="memeDetailIimageView" destination="t3A-Dk-Nsc" id="cb7-eY-dai"/>
                         <segue destination="PRy-ga-o11" kind="show" identifier="detailToEditor" id="Qx7-gq-06i"/>
                     </connections>
@@ -499,7 +504,7 @@
                         <color key="tintColor" red="0.99999600649999998" green="1" blue="0.44761344180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" red="0.22352941176470587" green="0.2627450980392157" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="23"/>
+                            <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="20"/>
                             <color key="textColor" red="0.99999600649999998" green="1" blue="0.44761344180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </textAttributes>
                     </navigationBar>
@@ -512,7 +517,7 @@
             </objects>
             <point key="canvasLocation" x="855" y="437"/>
         </scene>
-        <!--Meme Me-->
+        <!--MEME ME-->
         <scene sceneID="bSB-Se-aj3">
             <objects>
                 <viewController id="cZG-SQ-K2P" customClass="CollectionViewController" customModule="Meme_Me_V2_0" customModuleProvider="target" sceneMemberID="viewController">
@@ -521,7 +526,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="U6E-fo-3nY">
-                                <rect key="frame" x="0.0" y="118" width="375" height="485"/>
+                                <rect key="frame" x="0.0" y="98" width="375" height="505"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Qdc-Cb-1qu">
                                     <size key="itemSize" width="181" height="181"/>
@@ -542,7 +547,6 @@
                                                 </imageView>
                                             </subviews>
                                         </view>
-                                        <color key="backgroundColor" red="0.67404216610000001" green="0.26274509800000001" blue="0.48627450979999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="dkP-NB-S73" secondAttribute="trailing" id="EdO-CZ-dP1"/>
                                             <constraint firstAttribute="bottom" secondItem="dkP-NB-S73" secondAttribute="bottom" id="IaW-5W-sT6"/>
@@ -560,22 +564,22 @@
                                 </connections>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2X8-LL-4xV" userLabel="topView">
-                                <rect key="frame" x="0.0" y="-2" width="375" height="120"/>
+                                <rect key="frame" x="0.0" y="-2" width="375" height="100"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="center" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="nBu-oG-3jz">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HDe-Kz-6do">
-                                                <rect key="frame" x="0.0" y="0.0" width="187.5" height="120"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="187.5" height="100"/>
                                                 <color key="tintColor" red="1" green="0.9919199487" blue="0.37403681509999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <state key="normal" image="icons8-photo-gallery-60-2"/>
+                                                <state key="normal" image="album"/>
                                                 <connections>
                                                     <action selector="albumTapped:" destination="cZG-SQ-K2P" eventType="touchUpInside" id="eMs-kC-imx"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qwJ-MB-J9z">
-                                                <rect key="frame" x="187.5" y="0.0" width="187.5" height="120"/>
-                                                <state key="normal" image="icons8-screenshot-60"/>
+                                                <rect key="frame" x="187.5" y="0.0" width="187.5" height="100"/>
+                                                <state key="normal" image="camera"/>
                                                 <connections>
                                                     <action selector="cameraTapped:" destination="cZG-SQ-K2P" eventType="touchUpInside" id="xIR-Dw-h6u"/>
                                                 </connections>
@@ -586,7 +590,7 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.22352941179999999" green="0.26274509800000001" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="3zV-vH-4I3"/>
+                                    <constraint firstAttribute="height" constant="100" id="3zV-vH-4I3"/>
                                     <constraint firstItem="nBu-oG-3jz" firstAttribute="leading" secondItem="2X8-LL-4xV" secondAttribute="leading" id="6ec-GB-Xjt"/>
                                     <constraint firstAttribute="trailing" secondItem="nBu-oG-3jz" secondAttribute="trailing" id="aZB-31-sS2"/>
                                     <constraint firstAttribute="bottom" secondItem="nBu-oG-3jz" secondAttribute="bottom" id="nB2-NR-zpn"/>
@@ -606,7 +610,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="egJ-k1-YUg"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Meme Me" id="3bj-kL-yq2">
+                    <navigationItem key="navigationItem" title="MEME ME" id="3bj-kL-yq2">
                         <barButtonItem key="backBarButtonItem" title="Back" id="uYG-dd-UyQ"/>
                     </navigationItem>
                     <connections>
@@ -625,13 +629,13 @@
         </scene>
     </scenes>
     <resources>
+        <image name="album" width="75" height="75"/>
+        <image name="camera" width="75" height="75"/>
         <image name="collection" width="22.5" height="22.5"/>
-        <image name="icons8-photo-gallery-60-2" width="45" height="45"/>
-        <image name="icons8-screenshot-60" width="205.71427917480469" height="205.71427917480469"/>
         <image name="table" width="22.5" height="22.5"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RAL-mA-bbm"/>
-        <segue reference="ixM-GM-SKL"/>
+        <segue reference="5eR-ao-ab6"/>
+        <segue reference="sOf-SA-tBr"/>
     </inferredMetricsTieBreakers>
 </document>
