@@ -8,10 +8,8 @@
 
 import UIKit
 
-
-
 class TipsViewController: UIViewController {
-     var tipsArray = [Tips]()
+    var tipsArray = [Tips]()
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var tipsCollection: UICollectionView!
@@ -20,6 +18,7 @@ class TipsViewController: UIViewController {
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var pageControl: UIPageControl!
     
+    //This view controller will only support Portrait orientation
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
     }
@@ -29,24 +28,20 @@ class TipsViewController: UIViewController {
         tipsCollection.delegate = self
         tipsCollection.dataSource = self
         tipsCollection.isPagingEnabled = true
-       createArray()
+        initalizeTips()
     }
     
-    func createArray() {
-       
+    func initalizeTips() {
         tipsArray.append(Tips(image: UIImage(named: "tip1") ?? UIImage(), text: "From the Home Tab, Use Album or Camera to get the picture to be Memed"))
         tipsArray.append(Tips(image: UIImage(named: "tip2") ?? UIImage(), text: "From Left to Right \nShare the Meme to social media or save to your phone \n Open text setting \n cancel the current action"))
         tipsArray.append(Tips(image: UIImage(named: "tip3") ?? UIImage(), text: "Use the setting pop up to change font, color and border color of the text in the Meme"))
         tipsArray.append(Tips(image: UIImage(named: "tip4") ?? UIImage(), text: "Delete the meme by swiping the entry from right to left and choose Delete"))
     }
     
-    
+    //MARK: - Action methods
     @IBAction func previousTapped(_ sender: Any) {
         guard var index = tipsCollection.indexPathsForVisibleItems.first else { return }
-        print(tipsCollection.indexPathsForVisibleItems.first)
-          print(index.row)
         if index.row > 0 {
-            print(index.row)
             index.row -= 1
             scrollTo(index: index)
         }
@@ -54,9 +49,9 @@ class TipsViewController: UIViewController {
     
     @IBAction func nextTapped(_ sender: Any) {
         guard var index = tipsCollection.indexPathsForVisibleItems.first else { return }
-        if index.row < 3 {
-        index.row += 1
-        scrollTo(index: index)
+        if index.row < tipsArray.count - 1 {
+            index.row += 1
+            scrollTo(index: index)
         }
     }
     
@@ -65,38 +60,29 @@ class TipsViewController: UIViewController {
         pageControl.currentPage = index.row
     }
     
-    
     @IBAction func getStartedTapped(_ sender: Any) {
-      
-        
-        //window = UIWindow(frame: UIScreen.main.bounds)
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let homeVC = storyboard.instantiateViewController(withIdentifier: "home")
         appDelegate?.window?.rootViewController = homeVC
-        
-         //UserDefaults.standard.set(true, forKey: "HasLaunchedOnce")
-        
+        //UserDefaults.standard.set(true, forKey: "HasLaunchedOnce")
     }
-    
 }
 
+//MARK: - Collection View Delegate Methods
 extension TipsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return tipsArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? TipCollectionViewCell {
-        
-        cell.tipImageView.image = tipsArray[indexPath.row].image
-        cell.tipTextView.text = tipsArray[indexPath.row].text
-        return cell
+            cell.tipImageView.image = tipsArray[indexPath.row].image
+            cell.tipTextView.text = tipsArray[indexPath.row].text
+            return cell
         }
         return UICollectionViewCell()
     }
-    
-
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: tipsCollection.frame.width, height: tipsCollection.frame.height)
@@ -110,6 +96,4 @@ extension TipsViewController: UICollectionViewDelegate, UICollectionViewDataSour
         guard var index = tipsCollection.indexPathsForVisibleItems.first else { return }
         pageControl.currentPage = index.row
     }
-
-    
 }

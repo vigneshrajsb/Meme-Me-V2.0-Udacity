@@ -8,14 +8,9 @@
 
 import UIKit
 
-
-
-
-
 class TipCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var tipImageView: UIImageView!
     @IBOutlet weak var tipTextView: UITextView!
-    
-    
+
 }

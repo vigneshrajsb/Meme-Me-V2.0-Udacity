@@ -1,5 +1,5 @@
 //
-//  Meme.swift
+//  MemeMe.swift
 //  Meme Me V2.0
 //
 //  Created by Vigneshraj Sekar Babu on 9/23/18.
@@ -20,5 +20,4 @@ class MemeMe: Object {
     @objc dynamic var font: String = ""
     @objc dynamic var color: String = ""
     @objc dynamic var border: String = ""
-
 }

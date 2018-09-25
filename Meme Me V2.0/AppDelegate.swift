@@ -12,27 +12,21 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        // Override point for customization after application launch
         if UserDefaults.standard.bool(forKey: "HasLaunchedOnce") {
 
            
         } else {
-    
             self.window = UIWindow(frame: UIScreen.main.bounds)
             let tipsStoryboard = UIStoryboard(name: "Tips", bundle: nil)
             let viewController = tipsStoryboard.instantiateViewController(withIdentifier: "Tips")
             self.window?.rootViewController = viewController
             self.window?.makeKeyAndVisible()
         }
-        
         return true
     }
-
-   
 
 }
 

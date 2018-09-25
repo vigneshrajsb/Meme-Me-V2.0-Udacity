@@ -37,18 +37,19 @@ class MemeViewController: UIViewController {
     var shareButton: UIBarButtonItem!
     
     var selectedImage: UIImage?
-   // var memeToEdit: Meme?
      var memeToEdit: MemeMe?
     let picker = UIPickerView()
     
+    //Default attributes set
     var attributes: [NSAttributedString.Key: Any] = [NSAttributedString.Key.font: UIFont(name: "Impact", size: 30.0),
                                                      NSAttributedString.Key.foregroundColor: UIColor.white,
                                                      NSAttributedString.Key.strokeColor: UIColor.black,
                                                      NSAttributedString.Key.strokeWidth: -1.0]
-    
+    //Creating the list of fonts and colors as an array
     let fonts = ["IMPACT","HELVETICA","FUTURA","AVENIRNEXT"]
     let colors = ["WHITE","BLACK","BLUE","RED","YELLOW","GRAY"]
     
+    //Setting up default values
     var selectedFont: String = "IMPACT"
     var selectedColor: String = "WHITE"
     var selectedStrokeColor: String = "BLACK"
@@ -60,20 +61,35 @@ class MemeViewController: UIViewController {
     var sizeForPopUp: CGFloat = 0
     var viewFrameOriginY: CGFloat = 0
     
+    //MARK:- View methods override
     override func viewDidLoad() {
         super.viewDidLoad()
         initUI()
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+        selectedImage = nil
+        memeToEdit = nil
+    }
+    
+    override func viewDidLayoutSubviews() {
+        setLayout()
+    }
+    
+    //MARK: - UI setup and updates
     func initUI() {
         setupNavBar()
-        setLayout()
-      
         self.tabBarController?.tabBar.isHidden = true
+        setLayout()
+        //Setting up Aspect Fit for the image in Meme
         memeImageView.contentMode = .scaleAspectFit
-        topTextView.delegate = self
-        bottomTextView.delegate = self
+        
         if let memeToEdit = memeToEdit {
             memeImageView.image = UIImage(data: memeToEdit.image)
             topTextView.text = memeToEdit.topText
@@ -86,114 +102,11 @@ class MemeViewController: UIViewController {
             topTextView.attributedText = NSMutableAttributedString(string: defaultValueForTextView, attributes: attributes)
             bottomTextView.attributedText = NSMutableAttributedString(string: defaultValueForTextView, attributes: attributes)
         } else {
-            let alert = UIAlertController(title: "Error", message: "wrong", preferredStyle: .alert)
-            let action = UIAlertAction(title: "Go back", style: .default) { (action) in
-                self.navigationController?.popViewController(animated: true)
-            }
-            alert.addAction(action)
-            present(alert, animated: true, completion: nil)
+            Alerts.showCustomAlertAndDismissMemeEditor(on: self, title: "Error", message: "Something went wrong. Please try again!", actionTitle: "Try Again")
         }
-      setTextViewAttributes()
-        
-        fontTextField.delegate = self
-        colorTextField.delegate = self
-        strokeColorTextField.delegate = self
-//        
-//        if let selectedImage = selectedImage {
-//            memeImageView.image = selectedImage
-//        }
-       
-   
-            setupTextFieldsForPopUp()
+        setTextViewAttributes()
+        setupTextFieldsForPopUp()
         setupObserversForKeyboard()
-        
-
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-          self.tabBarController?.tabBar.isHidden = true
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-          self.tabBarController?.tabBar.isHidden = false
-        selectedImage = nil
-        memeToEdit = nil
-    }
-    
-    func setupObserversForKeyboard() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillShow), name: UIResponder.keyboardWillShowNotification , object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillHide), name: UIResponder.keyboardWillHideNotification , object: nil)
-    }
-    
-    
-    
-    
-    
-    @objc func keyBoardWillShow(notification: NSNotification) {
-      print("Keyboard will show")
-        
-        if view.frame.origin.y >= 0 {
-        /////////////
-        viewFrameOriginY = view.frame.origin.y
-        /////////
-        if bottomTextView.isFirstResponder {
-        print("View origin - \(self.view.frame.origin.y), \(viewFrameOriginY)")
-        view.frame.origin.y = view.frame.origin.y - getKeyboardHeight(for: notification)
-        }
-        }
-    }
-    
-    func getKeyboardHeight(for notification: NSNotification) -> CGFloat {
-        
-      guard let keyboardBeginFrame = notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue else { return 0 }
-        guard let keyboardEndFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return 0 }
-        print("Keyboard begin Frame - \(keyboardBeginFrame.cgRectValue.height) ---- Keyboard end Frame - \(keyboardEndFrame.cgRectValue.height)")
-        
-        return keyboardBeginFrame.cgRectValue.height
-    }
-    
-    @objc func keyBoardWillHide(notification: NSNotification) {
-        print("Keyboard will hide")
-        view.frame.origin.y = viewFrameOriginY
-            print("View origin - \(self.view.frame.origin.y), \(viewFrameOriginY)")
-    }
-    
-    func setLayout() {
-        if UIDevice.current.orientation.isLandscape {
-            sizeForMemeView = view.safeAreaLayoutGuide.layoutFrame.height
-             sizeForPopUp = sizeForMemeView - sizeForMemeView/16
-        } else {
-                sizeForMemeView = view.safeAreaLayoutGuide.layoutFrame.width
-                sizeForPopUp = sizeForMemeView - sizeForMemeView/9
-        }
-        
-        constraintMemeWidth.constant = sizeForMemeView
-        constraintMemeHeight.constant = sizeForMemeView
-        constraintPopUpWidth.constant = sizeForPopUp
-        constraintPopUpHeight.constant = sizeForPopUp
-    }
-    
-    override func viewDidLayoutSubviews() {
-        setLayout()
-    }
-    
-
-    
-    func setTextViewAttributes() {
-        sizeForTopTextView = getSizeFor(length: topTextView.attributedText.length)
-        updateTextAttributes(font: selectedFont, color: selectedColor, strokeColor: selectedStrokeColor)
-        let topAttributed =  NSMutableAttributedString(string: topTextView.text, attributes: attributes)
-        topAttributed.addAttribute(NSAttributedString.Key.font, value: getFontFromString(string: selectedFont).withSize(sizeForTopTextView), range: NSRange(location: 0, length: topAttributed.length))
-        topTextView.attributedText = topAttributed
-        topTextView.textAlignment = .center
-        
-        sizeForTopTextView = getSizeFor(length: bottomTextView.attributedText.length)
-        let bottomAttributed = NSMutableAttributedString(string: bottomTextView.text, attributes: attributes)
-        bottomAttributed.addAttribute(NSAttributedString.Key.font
-            , value: getFontFromString(string: selectedFont).withSize(sizeForBottomTextView), range: NSRange(location: 0, length: bottomAttributed.length))
-        bottomTextView.attributedText = bottomAttributed
-        bottomTextView.textAlignment = .center
-        
     }
     
     func setupNavBar() {
@@ -208,12 +121,156 @@ class MemeViewController: UIViewController {
         cancelButton.tintColor = customYellow
         optionsButton.image = UIImage(named: "settings")
     }
-
-    @objc func shareTapped() {
-        print("share tapped")
-         view.endEditing(true)
-        let imageToShare = generateMemeImage() 
+    
+    //MARK: - For Pop up
+    func enableOnlyCurrentTextField() {
+        fontTextField.isEnabled = fontTextField.isFirstResponder ? true : false
+        colorTextField.isEnabled = colorTextField.isFirstResponder ? true : false
+        strokeColorTextField.isEnabled = strokeColorTextField.isFirstResponder ? true : false
+    }
+    
+    func setupTextFieldsForPopUp() {
+        sampleLabel.attributedText = NSAttributedString(string: sampleText, attributes: attributes)
         
+        //setup the input  and input accessory view
+        picker.delegate = self
+        picker.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 160)
+        fontTextField.inputView = picker
+        colorTextField.inputView = picker
+        strokeColorTextField.inputView = picker
+        
+        let accessoryBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 40))
+        fontTextField.inputAccessoryView = accessoryBar
+        colorTextField.inputAccessoryView = accessoryBar
+        strokeColorTextField.inputAccessoryView = accessoryBar
+        
+        let accessoryButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(accessoryDoneTapped))
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: self, action: nil)
+        accessoryBar.setItems([flexibleSpace,accessoryButton], animated: true)
+        
+        //Display the values selected in the Text Fields
+        fontTextField.attributedText = NSAttributedString(string: selectedFont)
+        colorTextField.attributedText = NSAttributedString(string: selectedColor)
+        strokeColorTextField.attributedText = NSAttributedString(string: selectedStrokeColor)
+    }
+    
+    @objc func accessoryDoneTapped() {
+        view.endEditing(true)
+    }
+
+    //MARK: - Keyboard Methods
+    func setupObserversForKeyboard() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillShow), name: UIResponder.keyboardWillShowNotification , object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillHide), name: UIResponder.keyboardWillHideNotification , object: nil)
+    }
+    
+    func getKeyboardHeight(for notification: NSNotification) -> CGFloat {
+        //get the keyBoard frame and return the height to caller
+        guard let keyboardBeginFrame = notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue else { return 0 }
+        return keyboardBeginFrame.cgRectValue.height
+    }
+    
+    @objc func keyBoardWillShow(notification: NSNotification) {
+        //checking to see if the view origin is already moved up, if not move the origin with the keyboard height
+        if view.frame.origin.y >= 0 {
+            viewFrameOriginY = view.frame.origin.y
+            if bottomTextView.isFirstResponder {
+                view.frame.origin.y = view.frame.origin.y - getKeyboardHeight(for: notification)
+            }
+        }
+    }
+    
+    @objc func keyBoardWillHide(notification: NSNotification) {
+        //restore the view origin back to what it was
+        view.frame.origin.y = viewFrameOriginY
+    }
+    
+    //MARK: - Set MemeMe & Pop up size
+    func setLayout() {
+        if UIDevice.current.orientation.isLandscape {
+            sizeForMemeView = view.safeAreaLayoutGuide.layoutFrame.height
+             sizeForPopUp = sizeForMemeView - sizeForMemeView/16
+        } else {
+                sizeForMemeView = view.safeAreaLayoutGuide.layoutFrame.width
+                sizeForPopUp = sizeForMemeView - sizeForMemeView/9
+        }
+        constraintMemeWidth.constant = sizeForMemeView
+        constraintMemeHeight.constant = sizeForMemeView
+        constraintPopUpWidth.constant = sizeForPopUp
+        constraintPopUpHeight.constant = sizeForPopUp
+    }
+    
+    
+    func setTextViewAttributes() {
+        //determine the size of the text with the length - need when editing an existing meme
+        sizeForTopTextView = getSizeFor(length: topTextView.attributedText.length)
+        //update to existing attributes for existing memes and to default attributes on a new Meme
+        updateTextAttributes(font: selectedFont, color: selectedColor, strokeColor: selectedStrokeColor)
+        let topAttributed =  NSMutableAttributedString(string: topTextView.text, attributes: attributes)
+        //adding the size attribute here to change from default on existing memes
+        topAttributed.addAttribute(NSAttributedString.Key.font, value: getFontFromString(string: selectedFont).withSize(sizeForTopTextView), range: NSRange(location: 0, length: topAttributed.length))
+        topTextView.attributedText = topAttributed
+        topTextView.textAlignment = .center
+        
+        //repeat same for bottom text view
+        sizeForBottomTextView = getSizeFor(length: bottomTextView.attributedText.length)
+        let bottomAttributed = NSMutableAttributedString(string: bottomTextView.text, attributes: attributes)
+        bottomAttributed.addAttribute(NSAttributedString.Key.font
+            , value: getFontFromString(string: selectedFont).withSize(sizeForBottomTextView), range: NSRange(location: 0, length: bottomAttributed.length))
+        bottomTextView.attributedText = bottomAttributed
+        bottomTextView.textAlignment = .center
+    }
+    
+    //MARK: - Update Text Attributes Methods
+    func updateTextAttributes(for index: Int) {
+        if fontTextField.isFirstResponder {
+            selectedFont = fonts[index]
+            fontTextField.text = selectedFont
+            attributes[NSAttributedString.Key.font] = getFontFromString(string: selectedFont)
+        } else if colorTextField.isFirstResponder {
+            selectedColor = colors[index]
+            colorTextField.text = selectedColor
+            attributes[NSAttributedString.Key.foregroundColor] = getColorFromString(string: selectedColor)
+        } else if strokeColorTextField.isFirstResponder {
+            selectedStrokeColor = colors[index]
+            strokeColorTextField.text = selectedStrokeColor
+            attributes[NSAttributedString.Key.strokeColor] = getColorFromString(string: selectedStrokeColor)
+        }
+        sampleLabel.attributedText = NSAttributedString(string: sampleLabel.text ?? sampleText, attributes: attributes)
+    }
+    
+    func updateTextAttributes(font: String, color: String, strokeColor: String) {
+        attributes[NSAttributedString.Key.font] = getFontFromString(string: font)
+        attributes[NSAttributedString.Key.foregroundColor] = getColorFromString(string: color)
+        attributes[NSAttributedString.Key.strokeColor] = getColorFromString(string: strokeColor)
+    }
+    
+    //Method to update the text size on update of TextView text
+    func updateTextSize(forCharacters char: Int) {
+        let size: CGFloat = getSizeFor(length: char)
+        
+        if bottomTextView.isFirstResponder {
+            bottomTextView.font = bottomTextView.font?.withSize(size)
+            sizeForBottomTextView = size
+        } else {
+            topTextView.font = topTextView.font?.withSize(size)
+            sizeForTopTextView = size
+        }
+    }
+    
+    //Updating the font size for the attributed text as needed
+    func getAttributedFontWith(size: CGFloat, textFieldIdentifier: String) {
+        if textFieldIdentifier == "top" {
+            topTextView.font = topTextView.font?.withSize(sizeForTopTextView)
+        } else if textFieldIdentifier == "bottom" {
+            bottomTextView.font = bottomTextView.font?.withSize(sizeForBottomTextView)
+        }
+    }
+
+    //MARK: - Bar Button action methods
+    @objc func shareTapped() {
+         view.endEditing(true)
+        let imageToShare = generateMemeImage()
         let activityVC = UIActivityViewController(activityItems: [imageToShare], applicationActivities: [])
         activityVC.completionWithItemsHandler = { (activityChosen, completed, items, error) in
             if completed {
@@ -221,50 +278,8 @@ class MemeViewController: UIViewController {
                 self.navigationController?.popViewController(animated: true)
             }
         }
-        
         present(activityVC, animated: true, completion: nil)
-        
     }
-    
-    func generateMemeImage() -> UIImage {
-        let renderer = UIGraphicsImageRenderer(bounds: memeView.bounds)
-        let image = renderer.image { (imageRendererContext) in
-            memeView.layer.render(in: imageRendererContext.cgContext)
-        }
-        return image
-        }
-    
-    func saveMeme() {
-        print("Save Meme")
-        guard let image = memeImageView.image else { return }
-        
-        let meme = Meme(image: image, topText: topTextView.text, bottomText: bottomTextView.text, dateSaved: Date(), memedImage: generateMemeImage(),font: selectedFont, color: selectedColor, border: selectedStrokeColor)
-        
-        savedMemes.append(meme)
-        saveInRealm()
-        print(savedMemes.count)
-    }
-    
-    func saveInRealm() {
-        guard let image = memeImageView.image?.jpegData(compressionQuality: 1) else { return }
-        guard let memedImage = generateMemeImage().jpegData(compressionQuality: 1) else { return }
-    let meme = MemeMe()
-        meme.topText = topTextView.text
-        meme.bottomText = bottomTextView.text
-        meme.dateSaved = Date()
-        meme.font = selectedFont
-        meme.color = selectedColor
-        meme.border = selectedStrokeColor
-        meme.image = image
-        meme.memedImage = memedImage
-        
-        let realm = try! Realm()
-        try! realm.write {
-            realm.add(meme)
-        }
-    
-    }
-    
     
     @objc func optionsTapped() {
          view.endEditing(true)
@@ -285,7 +300,6 @@ class MemeViewController: UIViewController {
     }
     
     @IBAction func doneTapped(_ sender: Any) {
-        print("done tapped")
         accessoryDoneTapped()
         UIView.animate(withDuration: 0.2) {
             self.setTextViewAttributes()
@@ -297,19 +311,56 @@ class MemeViewController: UIViewController {
         }
     }
     
-
+    //MARK: - Meme Creation and Save
+    
+    func generateMemeImage() -> UIImage {
+        let renderer = UIGraphicsImageRenderer(bounds: memeView.bounds)
+        let image = renderer.image { (imageRendererContext) in
+            memeView.layer.render(in: imageRendererContext.cgContext)
+        }
+        return image
+    }
+    
+    func saveMeme() {
+        guard memeImageView.image != nil else { return }
+        saveInRealm()
+    }
+    
+    func saveInRealm() {
+        guard let image = memeImageView.image?.jpegData(compressionQuality: 1) else { return }
+        guard let memedImage = generateMemeImage().jpegData(compressionQuality: 1) else { return }
+        let meme = MemeMe()
+        meme.topText = topTextView.text
+        meme.bottomText = bottomTextView.text
+        meme.dateSaved = Date()
+        meme.font = selectedFont
+        meme.color = selectedColor
+        meme.border = selectedStrokeColor
+        meme.image = image
+        meme.memedImage = memedImage
+        
+        do {
+            let realm = try Realm()
+        try realm.write {
+            realm.add(meme)
+        }
+        } catch let error {
+            Alerts.showCustomAlert(on: self, title: "Error", message: error.localizedDescription, actionTitle: "Okay")
+        }
+    }
 }
 
+//MARK: - Text View Delegate Methods
 extension MemeViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        //
+        //if the user enters Return key, exit editing
         if text == "\n" {
             textView.resignFirstResponder()
             return false
         }
        
         if let textString = textView.text {
-
+            //if text length greater than the max allowed do not add characters and generate a taptic feedback to let the users know with an animation
               if textString.count > maxCharactersAllowedForMemeText && text != "" {
                 let generator = UINotificationFeedbackGenerator()
                 textView.shake()
@@ -317,16 +368,15 @@ extension MemeViewController: UITextViewDelegate {
              return false
             }
         }
-       
+        //Capitalization did not work on devices even with Auto Caps enabled in storyboard, so updating to CAPS here
         let existingText = textView.text as NSString
         let updatedText =  existingText.replacingCharacters(in: range, with: text.capitalized)
         
-
+        //Also updating to the attributes set while adding the replacement text
         let updateToAttributeText = NSMutableAttributedString(string: updatedText, attributes: attributes)
         textView.attributedText = updateToAttributeText
         updateTextSize(forCharacters: updateToAttributeText.length)
         textView.textAlignment = .center
-
         return false
     }
     
@@ -340,80 +390,13 @@ extension MemeViewController: UITextViewDelegate {
         if textView.text == "" {
             textView.text = "ENTER TEXT"
         }
-        
     }
     
-    
-    
-    func updateTextSize(forCharacters char: Int) {
-        let size: CGFloat = getSizeFor(length: char)
-       
-        if bottomTextView.isFirstResponder {
-        bottomTextView.font = bottomTextView.font?.withSize(size)
-            sizeForBottomTextView = size
-        } else {
-        topTextView.font = topTextView.font?.withSize(size)
-            sizeForTopTextView = size
-        }
-    }
-    
-    func getSizeFor(length: Int) -> CGFloat {
-        var size: CGFloat = 0
-        switch length {
-        case 0...35:
-            size = 30
-        case 36...55:
-            size = 26
-        case 56...70:
-            size = 22
-        default:
-            size = 22
-        }
-        return size
-    }
-    
-    
-    func getAttributedFontWith(size: CGFloat, textFieldIdentifier: String) {
-        if textFieldIdentifier == "top" {
-            topTextView.font = topTextView.font?.withSize(sizeForTopTextView)
-        } else if textFieldIdentifier == "bottom" {
-            bottomTextView.font = bottomTextView.font?.withSize(sizeForBottomTextView)
-        }
-    }
-
+  
 }
 
-
+//MARK: - Text Field Delegate Methods
 extension MemeViewController: UITextFieldDelegate {
-    
-    func setupTextFieldsForPopUp() {
-        
-        sampleLabel.attributedText = NSAttributedString(string: "SAMPLE TEXT", attributes: attributes)
-        
-      
-           picker.delegate = self
-        picker.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 160)
-        fontTextField.inputView = picker
-        colorTextField.inputView = picker
-        strokeColorTextField.inputView = picker
-        
-        let accessoryBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 40))
-        fontTextField.inputAccessoryView = accessoryBar
-        colorTextField.inputAccessoryView = accessoryBar
-        strokeColorTextField.inputAccessoryView = accessoryBar
-        
-        let accessoryButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(accessoryDoneTapped))
-        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: self, action: nil)
-        accessoryBar.setItems([flexibleSpace,accessoryButton], animated: true)
-        
-        fontTextField.attributedText = NSAttributedString(string: selectedFont)
-        colorTextField.attributedText = NSAttributedString(string: selectedColor)
-        strokeColorTextField.attributedText = NSAttributedString(string: selectedStrokeColor)
-    }
-    
-    @objc func accessoryDoneTapped() {
-        view.endEditing(true)
-    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -434,12 +417,7 @@ extension MemeViewController: UITextFieldDelegate {
        
         picker.selectRow(index, inComponent: 0, animated: true)
     }
-    
-    func enableOnlyCurrentTextField() {
-        fontTextField.isEnabled = fontTextField.isFirstResponder ? true : false
-        colorTextField.isEnabled = colorTextField.isFirstResponder ? true : false
-        strokeColorTextField.isEnabled = strokeColorTextField.isFirstResponder ? true : false
-    }
+
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         fontTextField.isEnabled =  true
@@ -449,11 +427,11 @@ extension MemeViewController: UITextFieldDelegate {
  
 }
 
+//MARK: - Picker delegate methods
 extension MemeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
-    
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if fontTextField.isFirstResponder {
@@ -464,7 +442,6 @@ extension MemeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-       
         if fontTextField.isFirstResponder {
             return fonts[row]
         } else {
@@ -472,41 +449,10 @@ extension MemeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         }
     }
     
-    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
         let index = pickerView.selectedRow(inComponent: component)
-        print(index)
         updateTextAttributes(for:index)
     }
     
-    func updateTextAttributes(for index: Int) {
-      
-        if fontTextField.isFirstResponder {
-             selectedFont = fonts[index]
-            fontTextField.text = selectedFont
-            attributes[NSAttributedString.Key.font] = getFontFromString(string: selectedFont)
 
-        } else if colorTextField.isFirstResponder {
-             selectedColor = colors[index]
-            colorTextField.text = selectedColor
-            attributes[NSAttributedString.Key.foregroundColor] = getColorFromString(string: selectedColor)
-        } else if strokeColorTextField.isFirstResponder {
-             selectedStrokeColor = colors[index]
-            strokeColorTextField.text = selectedStrokeColor
-            attributes[NSAttributedString.Key.strokeColor] = getColorFromString(string: selectedStrokeColor)
-        }
-           sampleLabel.attributedText = NSAttributedString(string: sampleLabel.text ?? "SAMPLE TEXT", attributes: attributes)
-    }
-    
-    func updateTextAttributes(font: String, color: String, strokeColor: String) {
-        attributes[NSAttributedString.Key.font] = getFontFromString(string: font)
-        attributes[NSAttributedString.Key.foregroundColor] = getColorFromString(string: color)
-        attributes[NSAttributedString.Key.strokeColor] = getColorFromString(string: strokeColor)
-    }
- 
-        
-    
-
-    
 }

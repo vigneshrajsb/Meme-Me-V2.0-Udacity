@@ -10,11 +10,10 @@ import UIKit
 
 class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
 
+    //Setting auto rotate properties for the Tab Bar controller
     override var shouldAutorotate: Bool {
         return true
     }
-    
-
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.all
@@ -23,29 +22,9 @@ class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self
+        //setting this on view did load when the application
         if UIDevice.current.orientation.isLandscape {
             UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
         }
     }
-    
-    
-//    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-//        
-//        guard let fromView = selectedViewController?.view, let toView = viewController.view else {
-//            return false
-//        }
-//        
-//        if fromView != toView {
-//            //If the selected index is less than one, then Table List was selected. As we have only two tabs
-//            let directionFlag: Bool = self.selectedIndex < 1 ? false : true
-//
-//            self.view.layer.add(tabBarAnimation(leftToRight: directionFlag), forKey: "revealCollection")
-//        }
-//        
-//      
-//        return true
-//    }
-
-
-
 }

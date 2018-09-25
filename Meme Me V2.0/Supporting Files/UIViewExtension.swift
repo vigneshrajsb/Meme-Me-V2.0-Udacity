@@ -8,9 +8,9 @@
 
 import Foundation
 import UIKit
-//to create a shadow
+
 extension UIView {
-    
+    //to create a shadow
     func createShadow() {
         layer.masksToBounds = false
         layer.shadowColor = UIColor.black.cgColor

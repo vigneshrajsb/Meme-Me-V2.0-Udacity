@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+let sampleText = "SAMPLE TEXT"
 let customBlue = UIColor(red: 57/255, green: 67/255, blue: 124/255, alpha: 1.0)
 let customYellow = UIColor(red: 255/255, green: 244/255, blue: 136/255, alpha: 1.0)
 
@@ -17,20 +18,17 @@ let maxCharactersAllowedForMemeText = 80
 let heightForTopViewInPortrait: CGFloat = 100
 let heightForTopViewInLandscape: CGFloat = 80
 
-
 let segueFromTableView = "tableToEditor"
 let segueFromCollectionView = "collectionToEditor"
 let segueToDetailFromTable = "listToDetail"
 let segueDetailToEditor = "detailToEditor"
 let segueCollectiontoDetail = "collectionToDetail"
 
-
 func removeNavBarBorder(for navigationController: UINavigationController) {
     let navBar = navigationController.navigationBar
     navBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
     navBar.shadowImage = UIImage()
 }
-
 
 func assignHeightValue(for constraint: NSLayoutConstraint) {
     if UIDevice.current.orientation.isLandscape {
@@ -52,7 +50,6 @@ func prepareSegueToMemeEditor(for segue: UIStoryboardSegue, sender: Any?) {
 
 func getColorFromString(string: String)-> UIColor {
     var color = UIColor()
-    //let colors = ["White","Black","Blue","Red", "Yellow", "Gray"]
     switch string {
     case "WHITE":
         color = UIColor.white
@@ -69,7 +66,6 @@ func getColorFromString(string: String)-> UIColor {
     default:
         color = UIColor.black
     }
-    
     return color
 }
 
@@ -111,40 +107,24 @@ func getFontFromString(string: String) -> UIFont {
     return font
 }
 
-//MARKS: - TextView Extension
-extension UITextView {
-    
-    override open var contentSize: CGSize {
-        didSet {
-            var topCorrection = (bounds.size.height - contentSize.height * zoomScale) / 2.0
-            topCorrection = max(0, topCorrection)
-            contentInset = UIEdgeInsets(top: topCorrection, left: 0, bottom: 0, right: 0)
-        }
+func getSizeFor(length: Int) -> CGFloat {
+    var size: CGFloat = 0
+    switch length {
+    case 0...35:
+        size = 30
+    case 36...55:
+        size = 26
+    case 56...70:
+        size = 22
+    default:
+        size = 22
     }
-    
-    func shake() {
-        let shake = CABasicAnimation(keyPath: "position")
-        shake.duration = 0.1
-        shake.repeatCount = 2
-        shake.autoreverses = true
-        
-        let fromPoint = CGPoint(x: center.x - 5 , y: center.y)
-        shake.fromValue = NSValue(cgPoint: fromPoint)
-        
-        let toPoint = CGPoint(x:  center.x + 5 , y: center.y)
-        shake.toValue = NSValue(cgPoint: toPoint)
-        
-        layer.add(shake, forKey: nil
-        )
-    }
-    
+    return size
 }
 
-class customTextField: UITextField {
-    override func caretRect(for position: UITextPosition) -> CGRect {
-        return .zero
-    }
-}
+
+
+
 
 
 

@@ -19,6 +19,7 @@ class CollectionViewController: UIViewController {
     
     let imagePicker = UIImagePickerController()
     
+    //MARK: - View Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeUI()
@@ -30,16 +31,12 @@ class CollectionViewController: UIViewController {
         setupLayout()
     }
     
-    func setupLayout() {
-        memeCollectionView.collectionViewLayout.invalidateLayout()
-        assignHeightValue(for: constraintForTopView)
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         memeCollectionView.reloadData()
         setupLayout()
     }
     
+    //MARK: - UI Methods
     func initializeUI() {
         topView.backgroundColor = customBlue
         if let navigationController = navigationController {
@@ -54,11 +51,18 @@ class CollectionViewController: UIViewController {
         setupImagePicker()
     }
     
+    func setupLayout() {
+        memeCollectionView.collectionViewLayout.invalidateLayout()
+        assignHeightValue(for: constraintForTopView)
+    }
+    
     func setupImagePicker() {
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
     }
     
+    
+    //MARK: - Action Methods
     @IBAction func cameraTapped(_ sender: UIButton) {
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             imagePicker.sourceType = .camera
@@ -80,6 +84,8 @@ class CollectionViewController: UIViewController {
         }
     }
     
+    
+    //MARK: - Segue Method
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == segueFromCollectionView {
             prepareSegueToMemeEditor(for: segue, sender: sender)
@@ -90,16 +96,14 @@ class CollectionViewController: UIViewController {
         }
     }
     
-
+    
 }
 
-
+//MARK: - Image Picker Delegate Methods
 extension CollectionViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
         dismiss(animated: true, completion: nil)
-        
         if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             performSegue(withIdentifier: segueFromCollectionView, sender: image)
         }
@@ -108,35 +112,29 @@ extension CollectionViewController: UIImagePickerControllerDelegate, UINavigatio
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-    
 }
 
-
-
+//MARK: - Collection View delegate Methods
 extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //return savedMemes.count
         return results.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as? MemeCollectionViewCell {
-        
             cell.memeImageView.image = UIImage(data: results[indexPath.row].memedImage)
-        return cell
+            return cell
         }
         return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-      
-         performSegue(withIdentifier: segueCollectiontoDetail, sender: results[indexPath.row])
+        performSegue(withIdentifier: segueCollectiontoDetail, sender: results[indexPath.row])
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let viewWidth = self.view.safeAreaLayoutGuide.layoutFrame.width
-        
         var cellWidth = UIDevice.current.orientation.isLandscape ? viewWidth/5 : viewWidth/3
         if UIDevice.current.orientation.isFlat {
             cellWidth = UIApplication.shared.statusBarOrientation.isLandscape ? viewWidth/5 : viewWidth/3

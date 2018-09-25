@@ -10,11 +10,14 @@ import UIKit
 import RealmSwift
 import Realm
 
-var savedMemes: [Meme] = []
 var results: Results<MemeMe> = {
-    let realm = try! Realm()
-    let results = realm.objects(MemeMe.self).sorted(byKeyPath: "dateSaved", ascending: false)
-    return results
+    do {
+        let realm = try Realm()
+        let results = realm.objects(MemeMe.self).sorted(byKeyPath: "dateSaved", ascending: false)
+        return results
+    } catch let error {
+        fatalError(error.localizedDescription)
+    }
 }()
 
 class ListViewController: UIViewController {
@@ -28,7 +31,8 @@ class ListViewController: UIViewController {
     @IBOutlet weak var memeList: UITableView!
     
     let imagePicker = UIImagePickerController()
-
+    
+    //MARK: - View Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeUI()
@@ -41,23 +45,20 @@ class ListViewController: UIViewController {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-      
         guard tabBarController?.selectedIndex == 0 else { return }
         assignHeightValue(for: constraintTopViewHeight)
     }
     
-
+    //MARK: - UI Setup
     func initializeUI() {
         topView.backgroundColor = customBlue
-        
         if  let navigationController = navigationController  {
             removeNavBarBorder(for: navigationController)
-           
         }
         if let titleImage = UIImage(named: "title"){
             let imgView = UIImageView(image: titleImage)
             imgView.contentMode = .scaleAspectFit
-           self.navigationItem.titleView = imgView
+            self.navigationItem.titleView = imgView
         }
         topView.createShadow()
         setupImagePicker()
@@ -68,6 +69,8 @@ class ListViewController: UIViewController {
         imagePicker.allowsEditing = true
     }
     
+    
+    //MARK: - Action Methods
     @IBAction func cameraTapped(_ sender: UIButton) {
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             imagePicker.sourceType = .camera
@@ -89,26 +92,36 @@ class ListViewController: UIViewController {
         }
     }
     
+    //MARK: - Realm Delete
+    func deleteMemeWith(index: IndexPath) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.delete(results[index.row])
+            }
+        } catch let error {
+            Alerts.showCustomAlert(on: self, title: "Error", message: error.localizedDescription, actionTitle: "Okay")
+        }
+    }
+    
+    //MARK: - Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == segueFromTableView {
-      prepareSegueToMemeEditor(for: segue, sender: sender)
+            prepareSegueToMemeEditor(for: segue, sender: sender)
         } else if segue.identifier == segueToDetailFromTable {
             if let detailVC = segue.destination as? DetailViewController {
                 detailVC.selectedMeme = sender as? MemeMe
             }
-            
-            
         }
-        
     }
 }
 
+//MARK: - Image Picker Controller Delegate methods
 extension ListViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-          imagePicker.dismiss(animated: true, completion: nil)
+        imagePicker.dismiss(animated: true, completion: nil)
         if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
-             performSegue(withIdentifier: segueFromTableView, sender: image)
+            performSegue(withIdentifier: segueFromTableView, sender: image)
         }
     }
     
@@ -118,13 +131,13 @@ extension ListViewController: UIImagePickerControllerDelegate, UINavigationContr
     
 }
 
+//MARK: - Table view delegate methods
 extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return results.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         if let cell = memeList.dequeueReusableCell(withIdentifier: "tableCell") as? MemeTableViewCell {
             let meme = results[indexPath.row]
             cell.memeImageView.image = UIImage(data: meme.memedImage)
@@ -138,7 +151,6 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-         
         performSegue(withIdentifier: segueToDetailFromTable, sender: results[indexPath.row])
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -152,26 +164,18 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     
-    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == UITableViewCell.EditingStyle.delete) {
             // handle delete (by removing the data from your array and updating the tableview)
             let alert = UIAlertController(title: "Delete Meme", message: "Are you sure you want to delete this Meme?", preferredStyle: .alert)
             let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (action) in
-                let realm = try! Realm()
-                try! realm.write {
-                    realm.delete(results[indexPath.row])
-                }
-                  self.memeList.reloadData()
+                self.deleteMemeWith(index: indexPath)
+                self.memeList.reloadData()
             }
             let cancelAction = UIAlertAction(title: "Cancel", style: .default) 
-            
             alert.addAction(deleteAction)
             alert.addAction(cancelAction)
             present(alert, animated: true, completion: nil)
-            
-          
-          
         }
     }
     
