@@ -16,9 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch
         if UserDefaults.standard.bool(forKey: "HasLaunchedOnce") {
-
-           
+            //if not application's first launch then launch Tab Bar controller as setup in Main Storyboard
         } else {
+            //load the Getting Started View controller
             self.window = UIWindow(frame: UIScreen.main.bounds)
             let tipsStoryboard = UIStoryboard(name: "Tips", bundle: nil)
             let viewController = tipsStoryboard.instantiateViewController(withIdentifier: "Tips")

@@ -32,10 +32,20 @@ class TipsViewController: UIViewController {
     }
     
     func initalizeTips() {
-        tipsArray.append(Tips(image: UIImage(named: "tip1") ?? UIImage(), text: "From the Home Tab, Use Album or Camera to get the picture to be Memed"))
-        tipsArray.append(Tips(image: UIImage(named: "tip2") ?? UIImage(), text: "From Left to Right \nShare the Meme to social media or save to your phone \n Open text setting \n cancel the current action"))
-        tipsArray.append(Tips(image: UIImage(named: "tip3") ?? UIImage(), text: "Use the setting pop up to change font, color and border color of the text in the Meme"))
-        tipsArray.append(Tips(image: UIImage(named: "tip4") ?? UIImage(), text: "Delete the meme by swiping the entry from right to left and choose Delete"))
+        let reviewtip = "Thank you for your time in reviewing my MemeMe 2.0 Project. \nI have used the Grading rubric to complete all the items but due to similatities from MemeMe 1.0, i wanted to add my own things to the app and i have change few of the UI elements requested and i hope that will be okay. Hope you like what you see from here!!"
+        let tip1 = "From the Home Tab, Use Album or Camera buttons and select the picture to Meme it. Crop the Image to your liking for selecting the section of the picture we need."
+        let tip2 = "Tap on the Text to enter your own text to the Meme. \n\nLet your imagination fly!"
+        let tip3 = "Once the image is selected, in the Meme Editor use the buttons to do more actions. SHARE button lets you share the Meme directly to the media of your liking. Use SETTINGS to customize the text in the Meme."
+        let tip4 = "Choose from a variety of Fonts & Colors to create the Text that you like and the one that suits the Meme image. \n\nMore styles will be added regularly."
+        let tip5 = "From the List Tab - use right Swipe to Delete the Meme if you do not want it anymore"
+        tipsArray.append(Tips(image: UIImage(named: "reviewTip") ?? UIImage(), text: reviewtip))
+        tipsArray.append(Tips(image: UIImage(named: "tip1") ?? UIImage(), text: tip1))
+        tipsArray.append(Tips(image: UIImage(named: "tip2") ?? UIImage(), text: tip2))
+        tipsArray.append(Tips(image: UIImage(named: "tip3") ?? UIImage(), text: tip3))
+        tipsArray.append(Tips(image: UIImage(named: "tip4") ?? UIImage(), text: tip4))
+        tipsArray.append(Tips(image: UIImage(named: "tip5") ?? UIImage(), text: tip5))
+        
+        pageControl.numberOfPages = tipsArray.count
     }
     
     //MARK: - Action methods
@@ -65,7 +75,7 @@ class TipsViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let homeVC = storyboard.instantiateViewController(withIdentifier: "home")
         appDelegate?.window?.rootViewController = homeVC
-        //UserDefaults.standard.set(true, forKey: "HasLaunchedOnce")
+        UserDefaults.standard.set(true, forKey: "HasLaunchedOnce")
     }
 }
 
