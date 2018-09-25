@@ -276,7 +276,7 @@ class MemeViewController: UIViewController {
         activityVC.completionWithItemsHandler = { (activityChosen, completed, items, error) in
             if completed {
                 self.saveMeme()
-                self.navigationController?.popViewController(animated: true)
+                self.navigationController?.popToRootViewController(animated: true)
             }
         }
         //if ipad present in pop over presentation controller
@@ -348,7 +348,11 @@ class MemeViewController: UIViewController {
         do {
             let realm = try Realm()
         try realm.write {
+            if let memeToEdit = memeToEdit{
+              realm.delete(memeToEdit)
+            }
             realm.add(meme)
+    
         }
         } catch let error {
             Alerts.showCustomAlert(on: self, title: "Error", message: error.localizedDescription, actionTitle: "Okay")
