@@ -32,6 +32,7 @@ class CollectionViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
         memeCollectionView.reloadData()
         setupLayout()
     }
