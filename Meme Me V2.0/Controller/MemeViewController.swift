@@ -277,6 +277,7 @@ class MemeViewController: UIViewController {
             if completed {
                 self.saveMeme()
                 self.navigationController?.popToRootViewController(animated: true)
+                
             }
         }
         //if ipad present in pop over presentation controller
