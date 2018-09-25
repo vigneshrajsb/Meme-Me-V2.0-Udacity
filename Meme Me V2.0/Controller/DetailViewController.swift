@@ -62,6 +62,11 @@ class DetailViewController: UIViewController {
     @objc func shareTapped() {
         guard let imageAToShare = memeDetailIimageView.image else { return }
         let activityVC = UIActivityViewController(activityItems: [imageAToShare], applicationActivities: nil)
+        //if ipad present in pop over presentation controller
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            activityVC.popoverPresentationController?.sourceView = self.view
+            activityVC.popoverPresentationController?.sourceRect = CGRect(x: self.view.frame.minX , y: self.view.frame.minY , width: 100, height: 130)
+        }
         present(activityVC, animated: true)
     }
     

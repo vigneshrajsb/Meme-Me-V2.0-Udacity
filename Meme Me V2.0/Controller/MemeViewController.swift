@@ -187,6 +187,7 @@ class MemeViewController: UIViewController {
     
     //MARK: - Set MemeMe & Pop up size
     func setLayout() {
+        let sizeIfiPad : CGFloat = 350.0
         if UIDevice.current.orientation.isLandscape {
             sizeForMemeView = view.safeAreaLayoutGuide.layoutFrame.height
              sizeForPopUp = sizeForMemeView - sizeForMemeView/16
@@ -196,8 +197,8 @@ class MemeViewController: UIViewController {
         }
         constraintMemeWidth.constant = sizeForMemeView
         constraintMemeHeight.constant = sizeForMemeView
-        constraintPopUpWidth.constant = sizeForPopUp
-        constraintPopUpHeight.constant = sizeForPopUp
+        constraintPopUpWidth.constant = UIDevice.current.userInterfaceIdiom == .pad ? sizeIfiPad : sizeForPopUp
+        constraintPopUpHeight.constant = UIDevice.current.userInterfaceIdiom == .pad ? sizeIfiPad : sizeForPopUp
     }
     
     
@@ -277,6 +278,11 @@ class MemeViewController: UIViewController {
                 self.saveMeme()
                 self.navigationController?.popViewController(animated: true)
             }
+        }
+        //if ipad present in pop over presentation controller
+        if UIDevice.current.userInterfaceIdiom == .pad {
+        activityVC.popoverPresentationController?.sourceView = self.view
+        activityVC.popoverPresentationController?.sourceRect = CGRect(x: self.view.frame.minX , y: self.view.frame.minY , width: 100, height: 130)
         }
         present(activityVC, animated: true, completion: nil)
     }

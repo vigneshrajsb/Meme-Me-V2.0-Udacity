@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch
         if UserDefaults.standard.bool(forKey: "HasLaunchedOnce") {
             //if not application's first launch then launch Tab Bar controller as setup in Main Storyboard
+                 UserDefaults.standard.set(false, forKey: "HasLaunchedOnce")
         } else {
             //load the Getting Started View controller
             self.window = UIWindow(frame: UIScreen.main.bounds)
